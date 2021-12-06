@@ -352,6 +352,35 @@ int main(){
 # Heap sort
 # Priority queue
 # Binary Search Tree
+![image](support/Preorder-from-Inorder-and-Postorder-traversals.jpg){width=70%}
+
+```c
+void writeTree(FILE *fp, node_t *rp, int modo) {
+  if (rp == NULL) {
+    return;
+  }
+
+  if (modo == PREORDER) {
+    writeData(fp, rp->data);
+  }
+
+  writeTree(fp, rp->left, modo);
+
+  if (modo == INORDER) {
+    writeData(fp, rp->data);
+  }
+
+  writeTree(fp, rp->right, modo);
+
+  if (modo == POSTORDER) {
+    writeData(fp, rp->data);
+  }
+
+  return;
+}
+
+```
+
 # Heap sort
 # Hash tables
 # Greedy
