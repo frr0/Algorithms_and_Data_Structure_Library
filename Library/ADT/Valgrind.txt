@@ -1,0 +1,354 @@
+==438512== Memcheck, a memory error detector
+==438512== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==438512== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==438512== Command: ./program f1.txt f2.txt
+==438512== Parent PID: 438511
+==438512== 
+==438512== Invalid write of size 8
+==438512==    at 0x401446: insert_comp (producer.c:11)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a44cb8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401415: insert_comp (producer.c:9)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid write of size 8
+==438512==    at 0x401452: insert_comp (producer.c:12)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a44c70 is 8 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x40151C: scan_list (producer.c:34)
+==438512==    by 0x401367: core (core.c:29)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a451b8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401415: insert_comp (producer.c:9)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x40153D: scan_list (producer.c:37)
+==438512==    by 0x401367: core (core.c:29)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45170 is 8 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid write of size 8
+==438512==    at 0x4014A4: insert_item (producer.c:23)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a462e8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401491: insert_item (producer.c:22)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4014AC: insert_item (producer.c:24)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a462e8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401491: insert_item (producer.c:22)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4014C3: insert_item (producer.c:25)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a462e8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401491: insert_item (producer.c:22)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid write of size 4
+==438512==    at 0x4014CA: insert_item (producer.c:25)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a46338 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x40149F: insert_item (producer.c:23)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4014D1: insert_item (producer.c:26)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a462e8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401491: insert_item (producer.c:22)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4014D9: insert_item (producer.c:26)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a44c68 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid write of size 8
+==438512==    at 0x4014DD: insert_item (producer.c:26)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a46340 is 8 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x40149F: insert_item (producer.c:23)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4014E5: insert_item (producer.c:27)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a462e8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401491: insert_item (producer.c:22)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid write of size 8
+==438512==    at 0x4014ED: insert_item (producer.c:27)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a44c68 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x40157C: display (producer.c:46)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a451b8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401415: insert_comp (producer.c:9)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4015E8: display (producer.c:48)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45168 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4015FF: display (producer.c:53)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45170 is 8 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4015AC: display (producer.c:49)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45028 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 4
+==438512==    at 0x4015B0: display (producer.c:49)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a466f8 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x40149F: insert_item (producer.c:23)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4015B7: display (producer.c:49)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45028 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4015D4: display (producer.c:50)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45028 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4015D8: display (producer.c:50)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a46700 is 8 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x40149F: insert_item (producer.c:23)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid write of size 8
+==438512==    at 0x4015E0: display (producer.c:50)
+==438512==    by 0x40139E: core (core.c:33)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45028 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x40162E: free_list (producer.c:59)
+==438512==    by 0x4013DA: core (core.c:39)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45028 is 0 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== Invalid read of size 8
+==438512==    at 0x4016AB: free_list (producer.c:72)
+==438512==    by 0x4013DA: core (core.c:39)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512==  Address 0x4a45030 is 8 bytes after a block of size 8 alloc'd
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 
+==438512== HEAP SUMMARY:
+==438512==     in use at exit: 1,168 bytes in 33 blocks
+==438512==   total heap usage: 50 allocs, 17 frees, 19,838 bytes allocated
+==438512== 
+==438512== 8 bytes in 1 blocks are indirectly lost in loss record 1 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401415: insert_comp (producer.c:9)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 23 (8 direct, 15 indirect) bytes in 1 blocks are definitely lost in loss record 2 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401407: insert_comp (producer.c:8)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 30 bytes in 5 blocks are indirectly lost in loss record 3 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x48FF18E: strdup (in /usr/lib64/libc-2.33.so)
+==438512==    by 0x4014BB: insert_item (producer.c:24)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 30 bytes in 5 blocks are definitely lost in loss record 4 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x48FF18E: strdup (in /usr/lib64/libc-2.33.so)
+==438512==    by 0x401445: insert_comp (producer.c:11)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 36 bytes in 5 blocks are indirectly lost in loss record 5 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x48FF18E: strdup (in /usr/lib64/libc-2.33.so)
+==438512==    by 0x40142F: insert_comp (producer.c:10)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 40 bytes in 5 blocks are definitely lost in loss record 6 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401491: insert_item (producer.c:22)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 61 (32 direct, 29 indirect) bytes in 4 blocks are definitely lost in loss record 7 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x401415: insert_comp (producer.c:9)
+==438512==    by 0x401316: core (core.c:24)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 70 (40 direct, 30 indirect) bytes in 5 blocks are definitely lost in loss record 8 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x401767: malloc_ck (util.c:12)
+==438512==    by 0x40149F: insert_item (producer.c:23)
+==438512==    by 0x401382: core (core.c:30)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 472 bytes in 1 blocks are still reachable in loss record 9 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x48E4CDE: __fopen_internal (in /usr/lib64/libc-2.33.so)
+==438512==    by 0x401725: open_file (util.c:6)
+==438512==    by 0x4012B8: core (core.c:19)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== 472 bytes in 1 blocks are still reachable in loss record 10 of 10
+==438512==    at 0x484086F: malloc (vg_replace_malloc.c:381)
+==438512==    by 0x48E4CDE: __fopen_internal (in /usr/lib64/libc-2.33.so)
+==438512==    by 0x401725: open_file (util.c:6)
+==438512==    by 0x4012D4: core (core.c:20)
+==438512==    by 0x4011F5: main (client.c:4)
+==438512== 
+==438512== LEAK SUMMARY:
+==438512==    definitely lost: 150 bytes in 20 blocks
+==438512==    indirectly lost: 74 bytes in 11 blocks
+==438512==      possibly lost: 0 bytes in 0 blocks
+==438512==    still reachable: 944 bytes in 2 blocks
+==438512==         suppressed: 0 bytes in 0 blocks
+==438512== 
+==438512== For lists of detected and suppressed errors, rerun with: -s
+==438512== ERROR SUMMARY: 148 errors from 29 contexts (suppressed: 0 from 0)
