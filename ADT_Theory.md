@@ -4,7 +4,7 @@ author: Francesco Ranellucci
 date: dicember 05, 2021
 ---
 
-
+\newpage
 
 # Sorting Algorithms
 
@@ -28,7 +28,8 @@ Vector divided in left sorted and right unsorted, when there is a number higher 
 
 ```c
 //2 subarray
-//left is sorted, right not sorted     i=1 means that the only sorted is in position 0.
+//left is sorted, right not sorted     i=1 means
+//that the only sorted is in position 0.
 
 #include <stdio.h>
 
@@ -53,8 +54,8 @@ void InsertionSort (int *A, int n) {
 		j = i - 1;//J=0: only sorted number
 		
 		while (j>=0 && x<A[j]) {
-			A[j+1] = A[j];//A[j] is not the smallest so it has to let the other go to left ex A[j+1=1]
-			j--;//j=-1
+			A[j+1] = A[j];//A[j] is not the smallest so it
+			j--;//j=-1  // has to let the other go to left ex A[j+1=1]
 		}
 
 		A[j+1] = x;//A[j+1=0]
@@ -62,6 +63,7 @@ void InsertionSort (int *A, int n) {
 }
 ```
 
+\newpage
 ## Exchange Sort
 
 > O(n^2)  
@@ -80,24 +82,25 @@ Vector divided in left unsorted and right sorted,  swap of any numbers with a sm
 
 ```c
 //2 subarray.
-//left is unssorted, right is empty     i<n-1 means that you assume at the beginning the last is the greater.
-void BubbleSort (int A[], int n) {
-  int i, j, temp;
+//left is unssorted, right is empty     i<n-1 means that you assume
+void BubbleSort (int A[], int n) {  //  at the beginning the last is
+  int i, j, temp;                   //  the greater.
 
   for (i=0; i<n-1; i++) {
-    for (j=0; j<n-i-1; j++){//j<n-1-i because the more you go on, less numbers you have left  
-      if (A[j] > A[j+1]) {
+    for (j=0; j<n-i-1; j++){        //j<n-1-i because the more you
+      if (A[j] > A[j+1]) {          // go on, less numbers you have left  
         temp = A[j];
         A[j] = A[j+1];
         A[j+1] = temp;
-      }//in this for you find the greater unsorted number and swapping it, you put it on the right
-  }
+      }//in this for you find the greater unsorted
+    }  //number and swapping it, you put it on the right
   }
 
   return;
 }
 ```
 
+\newpage
 ## Selection Sort
 
 > O(n^2)  
@@ -123,9 +126,10 @@ void SelectionSort (int A[], int n) {
 			if (A[j] < A[min]) {    //if the first on the right (A[j]) of the min num (A[min]) is less           
 				min = j;              //in that position there's the new smallest one
 			}
-		}                         //after this for you know which number is the smallest of the line 
-		                          //end now you swap it with the one you assume to be the smallest (min=i  line 7)   
-		temp = A[i];
+		}                         //after this for you know which number is
+                              //the smallest of the line 
+		                          //end now you swap it with the one you
+		temp = A[i];              //assume to be the smallest (min=i  line 7)  
 		A[i] = A[min];
 		A[min] = temp;
 	}
@@ -134,6 +138,7 @@ void SelectionSort (int A[], int n) {
 }
 ```
 
+\newpage
 ## Shell Sort
 
 > O(n^2)  
@@ -178,6 +183,7 @@ void ShellSort (int A[], int n) {
 }
 ```
 
+\newpage
 ## Counting Sort
 
 > O(n^2)  
@@ -213,6 +219,7 @@ void CountingSort(int A[], int n, int k) {
 ```
 
 
+\newpage
 ## Merge Sort
 
 > O(log_n(n))  
@@ -298,6 +305,7 @@ int main(void) {
 }
 ```
 
+\newpage
 ## Quik Sort
 
 > O(log_n(n))  
@@ -348,6 +356,7 @@ int main(){
 }
 ```
 
+\newpage
 # Complexity equation
 # Heap sort
 # Priority queue
@@ -381,11 +390,17 @@ void writeTree(FILE *fp, node_t *rp, int modo) {
 
 ```
 
+\newpage
 # Heap sort
+\newpage
 # Hash tables
 # Greedy
+\newpage
 # Graphs visit
+## Breadth-First Search (BFS)
+## Depth-First Search (DFS)
 
+\newpage
 # List library 
 
 ## Stack
@@ -509,6 +524,7 @@ void stack_dispose(stack_t *sp, void (*quit)(void *)) {
 }
 ```
 
+\newpage
 ## BST Library
 
 ```c
@@ -812,6 +828,7 @@ static node_t *findDeleteMax2(data_t *d, node_t *rp) {
 #endif
 ```
 
+\newpage
 # Item library
 
 ## Item with Stack
@@ -884,6 +901,7 @@ void item_dispose (void *ptr) {
 
 ## Item with BST
 
+\newpage
 # Util library
 ## Util with Stack
 
@@ -1001,6 +1019,7 @@ void util_matrix_dispose(void ***ptr, unsigned int n, unsigned int m,
 
 ## Util with BST
 
+\newpage
 # Data Library
 
 ## Data with BST
@@ -1055,6 +1074,7 @@ int compare(data_t d1, data_t d2) {
 }
 ```
 
+\newpage
 # Symbol table
 
 ```c
@@ -1208,7 +1228,7 @@ void STdisplay(ST st) {
 }
 ```
 
-# Item with Symbol tables
+## Item with Symbol tables
 
 ```c
 #ifndef _DATO_INCLUDED
