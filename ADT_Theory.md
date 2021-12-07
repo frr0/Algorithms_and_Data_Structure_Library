@@ -64,6 +64,7 @@ void InsertionSort (int *A, int n) {
 ```
 
 \newpage
+
 ## Exchange Sort
 
 > O(n^2)  
@@ -101,6 +102,7 @@ void BubbleSort (int A[], int n) {  //  at the beginning the last is
 ```
 
 \newpage
+
 ## Selection Sort
 
 > O(n^2)  
@@ -139,6 +141,7 @@ void SelectionSort (int A[], int n) {
 ```
 
 \newpage
+
 ## Shell Sort
 
 > O(n^2)  
@@ -184,6 +187,7 @@ void ShellSort (int A[], int n) {
 ```
 
 \newpage
+
 ## Counting Sort
 
 > O(n^2)  
@@ -220,6 +224,7 @@ void CountingSort(int A[], int n, int k) {
 
 
 \newpage
+
 ## Merge Sort
 
 > O(log_n(n))  
@@ -306,6 +311,7 @@ int main(void) {
 ```
 
 \newpage
+
 ## Quik Sort
 
 > O(log_n(n))  
@@ -357,9 +363,16 @@ int main(){
 ```
 
 \newpage
+
 # Complexity equation
+\newpage
+
 # Heap sort
+\newpage
+
 # Priority queue
+\newpage
+
 # Binary Search Tree
 ![image](support/Preorder-from-Inorder-and-Postorder-traversals.jpg){width=70%}
 
@@ -389,18 +402,1332 @@ void writeTree(FILE *fp, node_t *rp, int modo) {
 }
 
 ```
-
 \newpage
+
 # Heap sort
 \newpage
+
 # Hash tables
+
+<!-- # Hash table -->
+## Linear chaining
+
+h'(k) = k % M
+
+## Open address
+
+N << M -> Load Factor = alpha = N / M
+
+## Linear Probing
+
+h'(k) = (h(k)+i) % M
+
+## quadratic Probing
+
+h'(k) = (h(k)+ c_1 * i + c_2 * i^2) % M
+
+## double hasing
+
+h'(k) = (h_1(k)+ i * h_2(k) ) % M
+
+## linear probing
+### example
+
+```
+A S E R C H I N G X M P
+
+a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  
+1 2 3 4 5 6 7 8 9 10 11 12  0  1  2  3  4  5  6  7  8  9 10 11 12  0   
+
+
+h'(k) = k % M = k % 13  
+h'(k) = (k % 13 + i) % 13  
+
+0 1 2 3 4 5 6 7 8 9 10 11 12  
+n a   c   e s r h i            
+```
+\newpage
+
+## quadratic probing
+### example
+```
+A S E R C H I N G X M P  
+
+a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26   
+1 2 3 4 5 6 7 8 9 10 11 12  0  1  2  3  4  5  6  7  8  9 10 11 12  0   
+
+
+    h'(k) = (h_1(k)+ i * h_2(k) ) % M  
+->  h'(k) = (h(k)+ c_1 * i + c_2 * i^2) % M  
+
+0 1 2 3 4 5 6 7 8 9 10 11 12  
+  a   c   e s   r             
+```
+
 # Greedy
 \newpage
+
+# Graphs
+Definition
+  - G = (V, E)
+  - V = Finite and non empty set of vertices (simple or complex data)
+  - E = Finite set of edges, that define a binary relation on V
+
+- Directed/Undirected graphs
+
+- Directed
+  - Edge = sorted pair of vertices (u, v) E and u, v  V
+- Undirected
+  - Edge = unsorted pair of vertices (u, v) E and u, v  V
+- Weighted
+  - each edge has a weight
+
+### Loops
+- A loop is defined as a path where
+  - v 0 =v k , the starting and arrival vertices do coincide
+- Self-loop
+  - Loops whose length is 1
+- A graphs without loops is called
+- acyclic
+
+\newpage
+
 # Graphs visit
 ## Breadth-First Search (BFS)
 ## Depth-First Search (DFS)
 
+# Pointers
+```c
+sizeof(char)=1
+sizeof(short)
+sizeof(int)= 4 (32 bit) or 8 (32bit)
+sizeof(long)
+sizeof(float)
+sizeof(double)
+sizeof(longdouble)
+```
+
+### Example in memory
+```c
+struct student{
+  int id;
+  char a;
+  int id2;
+  char b;
+  float percentage
+}
+```
+
+In memory:
+
+. |1 byte|1 byte|1 byte|1 byte|
+:-:|:-:|:-:|:-:|:-:|
+id|x|x|x|x||
+a|x|||||
+id2|x|x|x|x||
+b|x|||||
+precentage|x|x|x|x||
+
+## Pointers 
+Pointers are varibles whose values are memory addresses 
+
+- The address operator, *
+  - Returns the value of the object to which its operand (i.e., a pointer) points  
+  - ```*p = v = 5``` because it's openrand ```p``` points to ```v```
+- The indirection operator, &
+  - Given a variable, it takes its address
+  - Given ```*p = v = 5```  ```&v``` is the address of ```v```
+
+```c
+<type> *<pointer>;
+int *pointer;
+int number;
+
+pointer = &number;
+```
+> This means that the pointer is equal to the number address, so pointer points to the number
+
+### All possible cases
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+  int v = 5;
+  int *p;
+  p = &v;
+
+  printf("%d\n", v);
+  /** printf("%d\n", *v); Error!*/
+  printf("%d\n", &v);
+  printf("%d\n", p);
+  printf("%d\n", *p);
+  printf("%d\n", &p);
+  printf("%d\n", *(&v));
+  /** printf("%d\n", &(*v)); Error!*/
+  printf("%d\n", *(&p));
+  printf("%d\n", &(*p));
+
+  return 0;
+}
+```
+```
+5
+//Error!
+957891628
+957891628
+5
+957891616
+5
+//Error!
+957891628
+957891628
+```
+
+Simbol|Meaning|Outcome
+:-:|:-:|:-:|
+v|integer value|5
+*v|meaningless|Error*!
+&v|Address of v|Warning*! address 957891628
+p|It is the address of v that points to v|Warning! address 957891628
+*p|It's where p points. So it's the int value v|5
+&p|p|Warning*! address 957891628
+*(&v)|v (integer value)|5
+&(*v)|meaningless|Error!
+*(&p)|p|Warning*! address 957891628
+&(*p)|p|Warning*! address 957891628
+
+>*The Warning is because the print is going to print an integer ("%d") but the
+>simbol is the integer address
+
+## Final version with no Errors and no Warnings
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+  int v = 5;
+  int *p;
+  p = &v;
+
+  printf("%d\n", v);
+  printf("%lu\n", (long unsigned int) &v);
+  printf("%lu\n", (long unsigned int) &v);
+  printf("%lu\n", (long unsigned int) p);
+  printf("%d\n", *p);
+  printf("%lu\n", (long unsigned int) &p);
+  printf("%d\n", *(&v));
+  printf("%lu\n", (long unsigned int) *(&p));
+  printf("%lu\n", (long unsigned int) &(*p));
+
+  return 0;
+}
+```
+Run:
+```
+5
+140735223946540
+140735223946540
+140735223946540
+5
+140735223946528
+5
+140735223946540
+140735223946540
+```
+
+Simbol|Meaning|Outcome
+:-:|:-:|:-:|
+v|integer value|5
+&v|Address of v|Address 140735223946540
+p|It is the address of v that points to v|Address 140735223946540
+*p|It's where p points. So it's the int value v|5
+&p|p|Address 140735223946540
+*(&v)|v (integer value)|5
+*(&p)|p|Address 140735223946540
+&(*p)|p|Address 140735223946540
+
+
+<!-- ```mermaid -->
+<!-- graph LR -->
+<!--   Pointer --> Value -->
+<!-- ``` -->
+<!-- ```mermaid -->
+<!-- graph LR -->
+<!--   p=&v=140735223946540 --> *p=v=5 -->
+<!-- ``` -->
+> ```p``` is the pointer that points to ```v = 5``` (```*p``` means pointed by ```p```) whose address is ```p = &v = 140735223946540```
+
+---
+### Example
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+  float *ptr;
+  float f = 7.5;
+
+  int *ppp;
+  int a = 3;
+
+  ptr = &f;
+  ppp = &a;
+
+  printf("%.2f\n%.2f\n", f, *ptr); 
+  printf("%d\n%d\n%d\n", &a, &(*ppp), ppp); 
+
+  return 0;
+}
+```
+Run:
+```
+7.5
+7.5
+32324325525
+32324325525
+32324325525
+```
+
+#### void pointer
+```c
+int i, j;
+void *pv;
+ ...
+pv = &i;
+ ...
+j = *pv;
+```
+
+```
+j = i;
+```
+```c
+int i, j;
+void *pv;
+ ...
+pv = (void *) &i;
+ ...
+j = (int) *pv;
+```
+
+```
+j = i;
+```
+## Pointer Arithmetic
+```c
+int i = 10;
+int *p1;
+int *p2;
+
+p1 = &i;
+p1++;
+```
+```p++``` makes the pointer points to next < type >, basically if int p++ means
+next byte, if char, next bit...
+
+```C
+int i = 10;
+int j = 20;
+int *p1;
+int *p2;
+p1 = &i;
+p2 = &j;
+if (*p1 == *p2) { *1... }
+if (p1 == p2) { *2... }
+if (p1 > p2) { *3... }
+```
+- *1 Check whether the referenced values are the
+same even if they are placed in different
+position within the system memory
+
+- *2 Check whether the two pointers
+refer to the same object, i.e., they
+store the same memory address
+
+- *3 Check whether the address p1 comes
+after the address p2 into the system
+memory; this is often meaningless
+If p1==p2 also *p1==*p2
+
+## By reference
+### Wrong
+```C
+int i; j;
+
+swap (i, j);
+```
+Here you change them locally only
+```C
+void swap (int x, int y) {
+  int tmp;
+  
+  tmp = x;
+  x = y;
+  y = tmp;
+
+  return;
+}
+```
+### Correct
+
+you pass the pointer &i which is then pointed by x
+```C
+int i; j;
+
+swap (&i, &j);
+```
+Here you pass the address
+```C
+void swap (int *x, int *y) {
+  int tmp;
+  
+  tmp = *x;
+  *x = *y;
+  *y = tmp;
+
+  return;
+}
+```
+
+### Pointers and arrays
+
+```c
+int v[N];
+
+v = &v[0]
+v+i = &v[i]
+
+*v = v[0]
+*(v+i) = v[i]
+```
+
+```c
+#define L ...
+
+int v[L];
+int *p;
+
+p = v;
+p = &v[0];
+
+//1
+for (i=0; i<L; i++) {
+  scanf ("%d", &v[i]);
+  printf ("%d", v[i]);
+}
+
+//2
+for (i=0, p=v; i<L; i++, p++) {
+  scanf ("%d", p);
+  printf ("%d", *p);
+}
+
+//3
+p = &v[0];
+for (i=0; i<L; i++) {
+  scanf ("%d", (p+i));
+  printf ("%d", *(p+i));
+}
+```
+### Pointers and strings
+The last element is ‘\0’
+
+```c
+int strlen (char str[]) {
+  int cnt;
+  cnt =0;
+  while (str[cnt] != '\0’)
+    cnt++;
+  return cnt;
+}
+```
+```c
+int strlen (char str[]) {
+  int cnt;
+  char *p;
+  cnt =0;
+  p = &s[0];
+  while (*p != '\0’) {
+    cnt++;
+    p++;
+  }
+  return cnt;
+}
+```
+```c
+int strlen (char *str) {
+  int cnt;
+  cnt = 0;
+  while (*str != '\0’) {
+    cnt++;
+    str++;
+  }
+  return cnt;
+}
+```
+```c
+int strlen (char *str) {
+  char *p;
+  p = str;
+  while (*p != '\0’) {
+    p++;
+  }
+  return (p - str);
+}
+```
+
+### Pointers and structures
+```c
+pointer_to_structure->member_name
+(*pointer_to_structure).member_name
+```
+```c
+struct student {
+  char s1[L], s2[L];
+  int i;
+  float f;
+};
+```
+```c
+struct student v;
+ ...
+read (&v);
+ ...
+```
+```c
+void read (struct student *v) {
+  char s1[DIM], s2[DIM];
+  int i; float f;
+
+  fprintf (stdout, “...: ");
+  scanf ("%s%s%d%d", s1, s2, &i, &f);
+
+  strcpy (v->s1, s1);
+  strcpy (v->s2, s2);
+
+  v->i = i;
+  v->f = f;
+
+  return;
+}
+```
+```c
+struct student {
+  char s1[L], s2[L];
+  int i;
+  float f;
+};
+```
+```c
+struct student v;
+ ...
+read (&v);
+ ...
+```
+```c
+void read (struct student *v) {
+  char s1[DIM], s2[DIM];
+  int i; float f;
+
+  fprintf (stdout, “...: ");
+  scanf ("%s%s%d%d", v->s1, v->s2, &v->i, &v->f);
+
+  return;
+}
+```
 \newpage
+
+# Dinamic Memory Allocation 
+
+<!-- ### Dinaminc memory allocation -->
+
+there was a cool way to go there if only i would have like to
+
+## 2D array 
+
+Two-dimensional arrays can be allocated in two
+different ways
+- As a single 1D array including all elements
+  - Easy syntax for allocation and manipulation
+  - Difficult manipulation logic
+- As an array of pointers to 1D arrays of elements
+  - Difficult syntax for allocation and manipulation
+  - Standard manipulation logic
+
+
+you start with one array allocation
+
+```c
+int **mat;
+
+mat = (int **) malloc(r * sizeof(int *));
+  if (mat==NULL)
+  {
+    fprintf(stderr, "memory allocation error.\n");
+    exit(1);
+  }
+
+  printf("number of columns: ");
+  scanf("%d", &c);
+  //allocate memory for columns
+  for (i=0; i<r; i++)
+  {   
+    mat[i] = /*(int *)*/ malloc(c * sizeof(int)); //as always (int **) can be avoided. 
+    if (mat==NULL)
+    {
+      fprintf(stderr, "memory allocation error.\n");
+      exit(2);
+    }
+  }
+```
+It has 2 ** beacause 
+```c
+mat[i] = (int **) malloc (r * sizeof (int*));
+```
+
+![image](support/0.png)
+
+- mat[i][j] or (mat[i])[j]
+  - Indicates a single element
+  - It is a value
+- mat[i]
+  - Indicates an entire row
+  - It is a pointer to an array of values
+- mat
+  - Indicates the entire matrix
+  - It is a pointer to an array of pointers
+
+  ![image](support/1.png)
+
+  mat = &mat[0]; //same notaion as p = &v;
+
+  #### matrix scanf
+  cool way to do it with strlen
+```c
+  int r, c, i;
+  char **mat;
+
+  printf ("Number of rows: ");
+  scanf ("%d", &r);
+
+  mat = (int **) malloc (r * sizeof (int *));
+  if (mat == NULL) {
+    fprintf (stderr, "Memory allocation error.\n");
+    exit (1);
+  }
+  for (i=0; i<r; i++) {
+    scanf (“%s”, str);
+
+    mat[i] = malloc ((strlen(str)+1) * sizeof (char));
+    if (mat[i] == NULL) {
+      fprintf (stderr, "Memory allocation error.\n");
+      exit (1);
+    }
+  }
+```
+
+![image](support/2.png)
+
+- As for 1D arrays, also 2D arrays may be made
+visible outside the environment in which they
+have been allocated
+- As for 1D arrays, it is possible to
+  - Use global variables to contain the matrix pointer
+  - Adopt the return statement to return it
+  - Pass the pointer to the matrix by reference
+    - Unfortunately, the pointer to the matrix is already a
+    2-star object (indirect reference)
+    - To pass it by reference, we have to use a 3-star
+    object (a reference to a reference of a reference)
+
+### Mtrix allocation in a function
+
+mat dies when function dies, but the content return
+```c
+char **mat;
+  ...
+mat = malloc2d (nr, nc);
+```
+```c
+char **malloc2d (int r, int c) {
+  int i;
+  char **mat;
+
+  mat = (char **) malloc (r * sizeof(char *));
+  if (mat == NULL) { ... }
+  for (i=0; i<r; i++) {
+    mat[i] = (char *) malloc(c * sizeof (char));
+    if (mat[i]==NULL) { ... }
+  }
+  return (mat);
+}
+```
+second way  
+here you pass the address and the content remains there
+
+```c
+char **mat;
+  ...
+malloc2d (&mat, nr, nc);
+```
+We use a 3-* object with a temporary 2* object as a support
+```c
+void malloc2d (char ***m, int r, int c) {
+  int i;
+  char **mat;
+
+  mat = (char **) malloc (r * sizeof(char *));
+  if (mat == NULL) { ... }
+  for (i=0; i<r; i++) {
+  mat[i] = (char *) malloc(c * sizeof (char));
+  if (mat[i]==NULL) { ... }
+  }
+  *m = mat;
+  return;
+}
+```
+another way
+```c
+char **mat;
+  ...
+malloc2d (&mat, nr, nc);
+```
+```c
+void malloc2d (char ***m, int r, int c) {
+  int i;
+
+  (*m) = (char **) malloc (r * sizeof(char *));
+  if (m == NULL) { ... }
+  for (i=0; i<r; i++) {
+    (*m)[i] = (char *) malloc(c * sizeof (char));
+    if ((*m)[i]==NULL) { ... }
+    }
+  return;
+}
+```
+
+### Free
+
+```c
+void free2d (char **m, int r) {
+  int i;
+  for (i=0; i<r; i++) {
+    free (m[i]);
+  }
+  free (m);
+  return;
+}
+```
+```c
+void free2d (char ***m, int r) {
+}
+  int **mat, i;
+  mat = *m;
+  for (i=0; i<r; i++) {
+    free (mat[i]);
+  }
+  free (mat);
+  m = NULL;
+  return;
+}
+```
+\newpage
+
+# List  
+
+
+
+<!-- # List    -->
+   
+<!-- [toc]    -->
+   
+## Intro   
+Easy to delete and add in ahead, in the middle, in the tail   
+  - FIFO or Stack   
+  - LIFO   
+  - Ordered List   
+  - Single-Linked List   
+  - Double-Linked List   
+  - List of List   
+   
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   a[val1] -->|val1->next| b[val2]    -->
+<!--   b[val2] -->|val2->next| c[val3]    -->
+<!--   c[val3] -->|val3->next| d[NULL]    -->
+<!--   ```    -->
+<!--   same as    -->
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   a[val1] -->b[val2]    -->
+<!--   b[val2] -->c[val3]    -->
+<!--   c[val3] -->d[NULL]    -->
+<!--   ```    -->
+## Prototypes (Atomic operation)   
+### Struct of a List   
+```c   
+#include <stdio.h>   
+#include <stdlib.h>   
+#include <ctype.h>   
+   
+/* structure declaration */   
+typedef struct node_s {   
+  int val;   
+  struct node_s *next;   
+} node_t;   
+```   
+## Function required to operate with list   
+```c   
+/* function prototypes */   
+int read (void);   
+node_t *insert (node_t *head, int val);   
+void search (node_t *head, int val);   
+node_t *delete_first (node_t *head);   
+node_t *delete_last (node_t *head);   
+node_t *delete (node_t *head, int val);   
+void display (node_t *head);   
+```   
+## Main   
+```c   
+/*    
+ *  main program   
+ */   
+int main(void) {   
+  node_t *head=NULL;   
+  int val, stop=0;   
+  char choice;   
+   
+  while (stop == 0) {   
+    fprintf(stdout, "\nAvailable commands:\n");   
+    fprintf(stdout, "  i: insert a value (sorted)\n");   
+    fprintf(stdout, "  s: search a value\n");   
+    fprintf(stdout, "  f: delete the first value\n");   
+    fprintf(stdout, "  l: delete the last value\n");   
+    fprintf(stdout, "  d: delete a specified value\n");   
+    fprintf(stdout, "  c: display the list contents\n");   
+    fprintf(stdout, "  e: end program\n");   
+    fprintf(stdout, "Make your choice: ");   
+    scanf("%c%*c", &choice);   
+   
+    switch (choice) {   
+      case 'i': val = read();   
+                head = insert(head, val);   
+                break;   
+      case 's': val = read();   
+                search(head, val);   
+                break;    
+      case 'f': head = delete_first(head);   
+                break;   
+      case 'l': head = delete_last(head);   
+                break;   
+      case 'd': val = read();   
+                head = delete(head, val);   
+                break;   
+      case 'c': display(head);   
+                break;   
+      case 'e': fprintf(stdout, "End of session.\n");   
+                stop = 1;   
+                break;   
+      default : fprintf(stdout, "Wrong choice!\n");   
+                break;   
+    }   
+  }   
+   
+  return EXIT_SUCCESS;   
+}   
+   
+/*   
+ *  read in a value   
+ */   
+int read (void) {   
+  int val;   
+   
+  fprintf(stdout, "Value: ");   
+  scanf("%d%*c", &val);   
+   
+  return val;   
+}   
+```   
+
+## List insertion   
+**Assigning a new value ```val``` to the ```p``` element in order to insert that element in the list**     
+**Malloc the struct**     
+![image](support/0.png)     
+
+### List visit     
+
+![image](support/1.png)     
+```c   
+/*   
+ *  insert a value in the list (sorted)   
+ */   
+node_t *insert (node_t *head, int val) {   
+  node_t *p, *q=head;   
+   
+  p = (node_t *)malloc(sizeof(node_t));   
+  p->val = val;   
+  p->next = NULL;   
+```   
+### Head insertion   
+```p``` insertion ```ahead```     
+```O(n)``` cost   
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   &head -->    -->
+<!--   val1_/_next -->val2_/_next    -->
+<!--   val2_/_next -->val3_/_next    -->
+<!--   ```    -->
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   p_/_next -->    -->
+<!--   val1_/_next -->val2_/_next    -->
+<!--   val2_/_next -->val3_/_next    -->
+  ```   
+![image](support/5.png)   
+```c   
+   
+  /* insert ahead */   
+  if (head==NULL || val<head->val) {   
+    p->next = head;   
+    //head = p;   
+    return p;   
+  }   
+```   
+### In-order insertion   
+![image](support/6.png)   
+```new->next = p->next```     
+```p->next = new```   
+### Middle/Tail insertion   
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   val1_/_next -->p_/_next    -->
+<!--   p_/_next -->val3_/_next    -->
+<!--   val1_/_next -->val3_/_next    -->
+  ```   
+```p->next = val1->next```     
+```val1->next = p```   
+```c   
+  /*    
+   *  scan the list with the q pointer in order to find    
+   *  the correct position where to perform the insertion   
+   */   
+  while (q->next!=NULL && q->next->val<val) {   
+    q = q->next;   
+  }   
+  p->next = q->next;   
+  q->next = p;   
+  return head;   
+}   
+```   
+#### Tail insertion   
+```Tail insertion``` is basically ```middle insertion```     
+<!-- **Middle:**    -->
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   a[val1] -->|val1->next| b[p]    -->
+<!--   b[p] -->|p->next| c[val2]    -->
+<!--   a[val1] -->|val1->next| c[val2]    -->
+<!--   ```    -->
+```p->next = val1->next```     
+```val1->next = p```     
+   
+<!-- ---    -->
+<!-- **Tail:**    -->
+<!-- ```mermaid    -->
+<!-- graph LR    -->
+<!--   a[val1] -->|val1->next| b[p]    -->
+<!--   b[p] -->|p->next| c[NULL]    -->
+<!--   a[val1] -->|val1->next| c[NULL]    -->
+<!--   ```    -->
+```p->next = val1->next```     
+```val1->next = p```     
+or     
+```p->next = NULL```     
+```val1->next = p```   
+![image](support/7.png)     
+
+## List searching     
+
+if ```p->key == value``` you exit and unless ```p == NULL``` you're good in your element of the list     
+![image](support/2.png)    
+```c   
+/*   
+ *  search a value in the list   
+ */   
+void search (node_t *head, int val) {   
+  node_t *p;   
+  int i;   
+   
+  for (p=head, i=0; p!=NULL && p->val<val; p=p->next, i++) ;   
+   
+  if (p!=NULL && p->val==val) {   
+    fprintf(stderr, "Element found (index = %d)\n", i);   
+  } else {   
+    fprintf(stderr, "Element NOT found.\n");   
+  }   
+}   
+```   
+   
+## List extraction   
+than you free ```p```   
+![image](support/3.png)   
+```p = head```     
+```head = head->next```     
+if there's only one element     
+```p = head```     
+```head = NULL```   
+   
+### In-order Extraction   
+```p = q->next```     
+```q->next = p->next```     
+or     
+```q->next = q->next->next```     
+   
+```p``` is only not to lose forever that element (red one), without step 1 I lose reference to elements and at the end ov the program I have many leaks. If I lose the reference I can not free it.   
+![image](support/4.png)   
+   
+## List deletion (Free)   
+### Free the entire list   
+![image](support/8.png)   
+```c   
+while (head !=0){   
+  p = head;   
+  head = head->next;   
+  free (p);   
+}   
+```   
+### Deleting first element   
+```c   
+/*   
+ *  delete the first element of the list   
+ */   
+node_t *delete_first (node_t *head) {   
+  node_t *p;   
+   
+  /* empty list */   
+  if (head != NULL) {   
+    p = head->next;   
+    free(head);   
+    return p;   
+  }   
+   
+  return head;   
+}   
+```   
+### Deleting a particular element   
+```c   
+/*   
+ *  delete a list element, keeping it sorted   
+ */   
+node_t *delete_last (node_t *head) {   
+  node_t *p, *q=head;   
+   
+  /* empty list */   
+  if (head == NULL) {   
+    fprintf(stderr, "Error: empty list\n");   
+    return NULL;   
+  }   
+   
+  /* delete ahead */   
+  if (head->next == NULL) {   
+    free(head);   
+    return NULL;   
+  }   
+   
+  /* scan the list with the q pointer */   
+  while (q->next->next!=NULL) {   
+    q = q->next;   
+  }   
+  p = q->next;   
+  q->next = NULL;   
+  free(p);   
+   
+  return head;   
+}   
+   
+/*   
+ *  delete a list element, keeping it sorted   
+ */   
+node_t *delete (node_t *head, int val) {   
+  node_t *p, *q=head;   
+   
+  /* empty list */   
+  if (head == NULL) {   
+    fprintf(stderr, "Error: empty list\n");   
+    return NULL;   
+  }   
+```   
+### Deleting ahead   
+```c   
+  /* delete ahead */   
+  if (val == head->val) {   
+    p = head->next;   
+    free(head);   
+    return p;   
+  }   
+```   
+## Scan to find an elemet to delete it   
+```c   
+  /*    
+   *  scan the list with the q pointer in order to find    
+   *  the element to remove from the list   
+   */   
+  while (q->next!=NULL && q->next->val<val) {   
+    q = q->next;   
+  }   
+  if (q->next!=NULL && q->next->val==val) {   
+    p = q->next;   
+    q->next = p->next;   
+    free(p);   
+  } else {   
+    fprintf(stderr, "Element NOT found.\n");   
+  }   
+   
+  return head;   
+}   
+```   
+
+## Display list   
+```c   
+/*   
+ *  display the list contents   
+ */   
+void display (node_t *head) {   
+  int i=0;   
+   
+  while (head != NULL) {   
+    fprintf(stderr, "Element %d = %d\n", i++, head->val);   
+    head = head->next;   
+  }   
+}   
+```   
+   
+## Sentinel   
+You don't check for ```null```   
+![image](support/9.png)   
+![image](support/10.png)   
+```c   
+sentinel->key = value;   
+p = head;   
+while (value!=p->key) {   
+  p = p->next;   
+}   
+if (p!=sentinel) {   
+  ...   
+value found   
+} else {   
+  ...   
+}   
+```   
+   
+## OT Circular buffer   
+   
+in a cicle   
+`(i++)/%`     
+so you reuse the array instead of use a matrix     
+  
+## FIFO  
+  
+### Enqueue  
+
+![image](support/12.png){width=70%}  
+![image](support/11.png){width=70%}  
+
+### Dequeue  
+
+![image](support/13.png){width=70%}  
+
+```c
+list_t *dequeue (list_t *tail, int *val, int *status) {
+list_t *old;
+if (tail != NULL) {
+  if (tail == tail->next) {
+    *val = tail->key;
+    free (tail);
+    tail
+    10
+    tail = NULL;
+    } else {
+    old = tail->next;
+    *val = old->key;
+    tail
+    X
+    tail->next = old->next;
+    free (old);
+    }
+  } else {
+  *status = FAILURE;
+  }
+return (tail);
+}
+```
+
+## Ordered Linked Lists  
+```c  
+do {  
+  ...  
+head = insert (head, val);  
+  ...  
+search (head, val);  
+  ...  
+head = extract (head, val);  
+} while ( ... );  
+```  
+
+  
+```c  
+list_t *dequeue (list_t *tail, int *val, int *status) {  
+list_t *old;  
+if (tail != NULL) {  
+*status = SUCCESS;  
+the self-loop) must be  
+if (tail == tail->next) {  
+implemented aside  
+*val = tail->key;  
+free (tail);  
+tail  
+10  
+tail = NULL;  
+} else {  
+old = tail->next;  
+*val = old->key;  
+tail  
+X  
+tail->next = old->next;  
+free (old);  
+}  
+} else {  
+*status = FAILURE;  
+}  
+return (tail);  
+}  
+```  
+#### search  
+![image](support/14.png){width=70%}  
+**linear cosst, not logaritmic, so, don't use at the examination**  
+A search can terminate
+- Successfully, when we find the key
+- Unsuccessfully when a record with a key larger (or
+smaller) than the search key is found
+- In any case
+- We can stop the search as soon as the key we are
+looking for become larger than the current node’s
+key
+- This make the search more efficient
+- Nevertheless, the search still has a linear cost (O(n))
+in the number of elements stored into the list
+
+```c
+void search (list_t *head, int val) {
+  list_t *p;
+  p=head;
+  while (p!=NULL) {
+    if (p->val=val)
+      return p;
+      if (p->val<val)
+      p=p->next;
+    }
+  }
+  return (NULL);
+```
+
+The are several approaches to solve the problem
+- Use two pointers to individuate two consecutive
+elements
+  - Move them along the list is a synchronized way
+  - Use the rightmost to compare and the leftmost to  insert
+- Use a the pointer of the pointed element to make
+the comparison
+  - Reach the element referenced by the pointed   element to compare, use the direct pointer to insert
+
+#### insert
+
+
+![image](support/15.png){width=70%}  
+![image](support/16.png){width=70%}  
+![image](support/17.png){width=70%}  
+```c
+list_t *insert (list_t *head, int val) {
+  list_t *p, *q=head;
+
+  //Create a new element
+  p = new_element ();
+  p->val = val;
+  p->next = NULL;
+
+  Head insertion
+  if (head==NULL || val<head->val) {
+    p->next = head;
+    return p;
+  }
+  while (q->next!=NULL && q->next->val<val) {
+    q = q->next;
+  }
+  return head;
+}
+```
+
+#### Extraction
+
+```c
+list_t *extract (list_t *head, int val) {
+  list_t *p, *q=head;
+  if (head == NULL) {
+    fprintf(stderr, "Error: empty list\n");
+    return NULL;
+  }
+  if (val == head->val) {
+    p = head->next;
+    free(head);
+    Head extraction
+    return p;
+  }
+  while (q->next!=NULL && q->next->val<val) {
+    q = q->next;
+  }
+}
+```
+![image](support/18.png){width=70%}  
+  
+#### Double linked list  
+\newpage
+![image](support/19.png){width=70%}  
+
+#### List of List  
+
+![image](support/20.png){width=70%}  
+
+#### Example
+
+![image](support/21.png){width=70%}
+
+you can extract from head1 and you insert in head2 lifo? with a head insertion
+
+solution  
+![image](support/22.png){width=70%}
+
+```c
+p = head1;
+while (p != NULL){
+  //p->val (p->key)
+  head2 = push (head2, p->val);
+  p = p->next;
+}
+```
+
+![image](support/23.png){width=70%} 
+
+Head extrction and in order insertion
+
+\newpage
+
 # List library 
 
 ## Stack
@@ -525,6 +1852,7 @@ void stack_dispose(stack_t *sp, void (*quit)(void *)) {
 ```
 
 \newpage
+
 ## BST Library
 
 ```c
@@ -829,6 +2157,7 @@ static node_t *findDeleteMax2(data_t *d, node_t *rp) {
 ```
 
 \newpage
+
 # Item library
 
 ## Item with Stack
@@ -902,7 +2231,9 @@ void item_dispose (void *ptr) {
 ## Item with BST
 
 \newpage
+
 # Util library
+
 ## Util with Stack
 
 ```c
@@ -1017,9 +2348,11 @@ void util_matrix_dispose(void ***ptr, unsigned int n, unsigned int m,
 }
 ```
 
+
 ## Util with BST
 
 \newpage
+
 # Data Library
 
 ## Data with BST
@@ -1075,6 +2408,7 @@ int compare(data_t d1, data_t d2) {
 ```
 
 \newpage
+
 # Symbol table
 
 ```c
