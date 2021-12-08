@@ -62,7 +62,6 @@ void InsertionSort (int *A, int n) {
 	}
 }
 ```
-
 \newpage
 
 ## Exchange Sort
@@ -100,7 +99,6 @@ void BubbleSort (int A[], int n) {  //  at the beginning the last is
   return;
 }
 ```
-
 \newpage
 
 ## Selection Sort
@@ -139,7 +137,6 @@ void SelectionSort (int A[], int n) {
   return;
 }
 ```
-
 \newpage
 
 ## Shell Sort
@@ -221,8 +218,6 @@ void CountingSort(int A[], int n, int k) {
 }
 
 ```
-
-
 \newpage
 
 ## Merge Sort
@@ -309,7 +304,6 @@ int main(void) {
   return(0);
 }
 ```
-
 \newpage
 
 ## Quik Sort
@@ -361,7 +355,6 @@ int main(){
   return 0;
 }
 ```
-
 \newpage
 
 # Complexity equation
@@ -402,9 +395,6 @@ void writeTree(FILE *fp, node_t *rp, int modo) {
 }
 
 ```
-\newpage
-
-# Heap sort
 \newpage
 
 # Hash tables
@@ -1142,13 +1132,11 @@ void free2d (char ***m, int r) {
 
 # List  
 
-
-
+## Intro   
 <!-- # List    -->
    
 <!-- [toc]    -->
    
-## Intro   
 Easy to delete and add in ahead, in the middle, in the tail   
   - FIFO or Stack   
   - LIFO   
@@ -1609,6 +1597,7 @@ free (old);
 return (tail);  
 }  
 ```  
+
 #### search  
 ![image](support/14.png){width=70%}  
 **linear cosst, not logaritmic, so, don't use at the examination**  
