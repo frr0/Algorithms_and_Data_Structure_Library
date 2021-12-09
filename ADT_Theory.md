@@ -3,7 +3,6 @@ title: Algorithms and Data Structures
 author: Francesco Ranellucci
 date: dicember 05, 2021
 ---
-
 \newpage
 
 # Sorting Algorithms
@@ -361,9 +360,146 @@ int main(){
 \newpage
 
 # Heap sort
+Data and Key
+
+```c
+struct heap_s {
+  Item *A;
+  int heapsize;
+} heap_t;
+```
+
+```
+#define LEFT(i) (2*i+1)
+#define RIGHT(i) (2*i+2)
+#define PARENT(i) ((int)(i-1)/2)
+```
+
+```c
+#define LEFT(i) (i<<1+1)
+#define RIGHT(i) (i<<1+2)
+#define PARENT(i) ((i-1)>>1)
+```
+
+```c
+heap->A[LEFT(i)]    //is its left child
+heap->A[RIGHT(i)]   //is its right child
+heap->A[PARENT(i)]  //is its parentd
+```
+```c
+heap->A[0]
+```
+
+![image](support/heap0.png){width=70%}
+
+the tree is filled in the array order
+
+largest on top, then has to be removed 
+
+```c
+void heapbuild (heap_t heap) {
+  int i;
+  for (i=(heap->heapsize)/2-1; i >= 0; i--) {
+    heapify (heap, i);
+  }
+  return;
+}
+```
+
+```c
+void heapify (heap_t heap, int i) {
+  int l, r, largest;
+  l = LEFT(i);
+  r = RIGHT(i);
+  if ((l<heap->heapsize) &&
+      (item_greater (heap->A[l], heap->A[i])))
+    largest = l;
+  else
+    largest = i;
+  if ((r<heap->heapsize)&&
+      (item_greater (heap->A[r], heap->A[largest])))
+    largest = r;
+  if (largest != i) {
+    swap (heap, i, largest);
+    heapify (heap, largest);
+  }
+  return;
+}
+```
+
+```c
+void heapsort (heap_t heap) {
+  int i, tmp;
+  heapbuild (heap);
+  tmp = heap->heapsize;
+  for (i=heap->heapsize-1; i>0; i--) {
+    swap (heap, 0, i);
+    heap->heapsize--;
+    heapify (heap,0);
+  }
+  heap->heapsize = tmp;
+  return;
+}
+```
+
 \newpage
 
 # Priority queue
+
+> $T(n) = O(log_2 n)$
+
+```c
+void pq_insert (PQ pq, Item item) {
+  int i;
+  i = pq->heapsize++;
+  while( (i>=1) &&
+      (item_less(pq->A[PARENT(i)], item)) )
+    pq->A[i] = pq->A[PARENT(i)];
+  i = PARENT (i);
+}
+pq->A[i] = item;
+return;
+}
+```
+
+```c
+Item pq_extract_max(PQ pq) {
+  Item item;
+  Extract max and move
+    last element into the
+    root node
+    swap (pq, 0, pq->heapsize-1);
+  item = pq->A[pq->heapsize-1];
+  pq->heapsize--;
+  heapify (pq, 0);
+  Reduce heap size
+}
+return item;
+```
+
+```c
+void pq_change (PQ pq, int i, Item item) {
+  if (item_less (item, pq->A[i]) {
+    decrease_key (pq, i);
+  } else {
+    increase_key (pq, i, item);
+  }
+}
+
+void decrease_key (PQ pq, int i) {
+  pq->A[i] = item;
+  heapify (pq, i);
+}
+
+void increase_key (PQ pq, int i) {
+  while( (i>=1) &&
+      (item_less(pq->A[PARENT(i)], item)) ) {
+    pq->A[i] = pq->A[PARENT(i)];
+    i = PARENT(i);
+  }
+  pq->A[i] = item;
+}
+```
 \newpage
 
 # Binary Search Tree
