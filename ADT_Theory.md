@@ -593,6 +593,90 @@ a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
 ```
 
 # Greedy
+> Finding every solution is expensive
+
+At each step you look for the best
+
+It doesn't backtrack
+
+## Cost function
+
+* selected a priorit
+  - start from empty solution
+  - sort it
+  - choice
+* modifyiable during the process
+  - choice stored in priority queue
+
+![image](support/gr0.png){width=70%}
+
+```c
+typedef struct activity {
+  char name[MAX];
+  int start, stop;
+  int selected;
+} activity_t;
+  ...
+int cmp (const void *p1, const void *p2);
+  ...
+acts = load(argv[1], &n);
+qsort ((void *)acts, n, sizeof(activity_t), cmp);
+choose (acts, n);
+display (acts, n);
+  ...
+
+  int cmp (const void *p1, const
+      activity_t *a1 = (activity_t
+        activity_t *a2 = (activity_t
+          return a1->stop - a2->stop;
+          }
+          void choose (activity_t *acts,
+            int i, stop;
+            }
+            void *p2) {
+          *)p1;
+        *)p2;
+      int n) {
+    acts[0].selected = 1;
+    stop = acts[0].stop;
+    for (i=1; i<n; i++) {
+      if (acts[i].start >= stop) {
+        acts[i].selected = 1;
+        stop = acts[i].stop;
+      }
+    }
+```
+
+images tree...
+
+```c
+{
+  PQ *pq;
+  pq = pq_init (maxN, item_compare);
+  for (i=0; i<maxN; i++) {
+    printf ("Enter letter & frequency: ");
+    scanf ("%s %d", &letter, &freq);
+    tmp = item_new (letter, freq);
+    pq_insert (pq, tmp);
+  }
+
+  while (pq_size(pq) > 1) {
+    l = pq_extract_max (pq);
+    r = pq_extract_max (pq);
+    tmp = item_new ('!', l->freq + r->freq);
+    tmp->left = l;
+    tmp->right = r;
+    pq_insert (pq, tmp);
+  }
+  root = pq_extract_max (pq);
+  pq_display (root, code, 0);
+}
+```
+
+Complexity
+
+$$ T(n) = O(n * log_2 n) $$
+
 \newpage
 
 # Graphs
