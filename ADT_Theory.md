@@ -2850,3 +2850,145 @@ Item ITEMsetvoid() {
 
 
 ```
+
+# Prototypes Library
+
+## Stack
+
+```c
+/* type declarations */
+typedef struct stack stack_t;
+
+/* structure declarations */
+struct stack {
+  void **array;
+  int index;
+  int size;
+};
+
+/* extern function prototypes */
+extern stack_t *stack_init(int size);
+extern int stack_count(stack_t *sp);
+extern int stack_push(stack_t *sp, void *data);
+extern int stack_pop(stack_t *sp, void **data_ptr);
+extern void stack_print(FILE *fp, stack_t *sp, void (*print)(FILE *, void *));
+extern void stack_dispose(stack_t *sp, void (*quit)(void *));
+```
+
+### Item
+
+```c
+/* type declarations */
+typedef struct item *item_t;
+
+/* extern function prototypes */
+extern int item_read(FILE *fp, void **ptr);
+extern void item_print(FILE *fp, void *ptr);
+extern int item_compare(void *data1, void *data2);
+extern void item_dispose(void *ptr);
+```
+
+### Util
+
+```c
+/* macro definition */
+#define util_check_m(expr, msg) \
+  if ( !(expr) ) { \
+    fprintf(stderr, "Error: %s\n", msg); \
+    exit(EXIT_FAILURE); \
+  }
+
+/* extern function prototypes */
+extern FILE *util_fopen(char *name, char *mode);
+extern void *util_malloc(unsigned int size);
+extern void *util_calloc(unsigned int num, unsigned int size);
+extern char *util_strdup(char *src);
+extern void util_array_dispose(void **ptr, unsigned int n, void (*quit)(void *));
+extern void **util_matrix_alloc(unsigned int n, unsigned int m, unsigned int size);
+extern void util_matrix_dispose(void ***ptr, unsigned int n, unsigned int m, 
+    void (*quit)(void *));
+```
+
+## BST
+
+```c
+#define PREORDER  -1
+#define INORDER    0
+#define POSTORDER  1
+
+typedef struct node node_t;
+
+struct node {
+  data_t val;
+  struct node *left;
+  struct node *right;
+};
+
+data_t getData (node_t *);
+node_t *createEmptyTree ();
+node_t *readTree(FILE *);
+node_t *searchI (node_t *, data_t);
+node_t *searchR (node_t *, data_t);
+node_t *treeMinI (node_t *);
+node_t *treeMinR (node_t *);
+node_t *treeMaxI (node_t *);
+node_t *treeMaxR (node_t *);
+node_t *insert(node_t *, data_t);
+node_t *delete(node_t *, data_t);
+void writeTree(FILE *, node_t *, int);
+void freeTree(node_t *);
+```
+
+```c
+void countNode (node_t *root, int *array);
+void countLevel (node_t * root, int *array, int l);
+void countPath (node_t * root, int *np, int *length);
+int visit (node_t *root, int key1, int key2);
+void visit_r (node_t *root, int key, int *d);
+```
+
+### Data
+
+```c
+typedef int data_t;
+
+int readData (FILE *, data_t *);
+void writeData (FILE *, data_t);
+int compare (data_t, data_t);
+```
+
+### Util
+
+```c
+void check_args(int argc, char **argv);
+FILE *open_file(char *filename, char *mode);
+void *malloc_ck(int size);
+int file_num_of_line_completed(char *filename, char *mode);
+```
+
+## ST
+
+```c
+typedef struct symboltable *ST;
+
+ST  	STinit(int) ;
+void 	STinsert(ST, Item) ;
+Item	STsearch(ST, Key) ;
+void	STdelete(ST, Key) ;
+void	STdisplay(ST) ;
+```
+
+### Item
+
+```c
+typedef struct item* Item;
+typedef char *Key;
+
+Item ITEMscan();
+void ITEMshow(Item data);
+int ITEMcheckvoid(Item data);
+Item ITEMsetvoid();
+Key KEYscan();
+int KEYcompare(Key k1, Key k2);
+Key KEYget(Item data);
+```
