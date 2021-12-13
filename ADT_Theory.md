@@ -706,7 +706,180 @@ Definition
 
 # Graphs visit
 ## Breadth-First Search (BFS)
+
+```c
+BFS (G, s)
+  for each vertex v in V
+    v.color = WHITE
+    v.dtime = inf
+    v.pred = NULL
+
+  queue_init (Q)
+  s.color = GRAY
+  s.dtime = 0
+  s.pred = NULL
+  queue_enqueue (Q, s)
+
+  while (!queue_empty (Q))
+    u = queue_dequeue (Q)
+    for each v in Adj(u)
+      if (v.color == WHITE)
+        vertex
+        v.color = GRAY
+        v.dtime = u.dtime + 1
+        v.pred = u
+        queue_enqueue (Q, v)
+
+    u.color = BLACK
+```
+
+![image](support/gr1.png){width=70%}
+
+![image](support/gr2.png){width=70%}
+
+\newpage
+
+```c
+g = graph_load(argv[1]);
+printf("Initial vertex? ");
+scanf("%d", &i);
+src = graph_find(g, i);
+
+graph_attribute_init (g);
+graph_bfs (g, src);
+
+n = g->g;
+printf ("List of vertices:\n");
+while (n != NULL) {
+  if (n->color != WHITE) {
+    printf("%2d: %d (%d)\n",
+        n->id, n->dist, n->pred ? n->pred->id : -1);
+  }
+  n = n->next;
+}
+graph_dispose(g);
+
+void graph_bfs (graph_t *g, vertex_t *n) {
+  queue_t *qp;
+  vertex_t *d;
+  edge_t *e;
+  qp = queue_init (g->nv);
+  n->color = GREY;
+  n->dist = 0;
+  n->pred = NULL;
+  queue_put (qp, (void *)n);
+
+  while (!queue_empty_m(qp)) {
+    queue_get(qp, (void **)&n);
+    e = n->head;
+    while (e != NULL) {
+      d = e->dst;
+      if (d->color == WHITE) {
+        d->color = GREY;
+        d->dist = n->dist + 1;
+        d->pred = n;
+        queue_put (qp, (void *)d);
+      }
+      e = e->next;
+    }
+    n->color = BLACK;
+  }
+  queue_dispose (qp, NULL);
+}
+```
+\newpage
+
 ## Depth-First Search (DFS)
+
+```c
+DFS (G)
+for each vertex v in V
+v.color = WHITE
+v.dtime = v.endtime = inf
+v.pred = NULL
+time = 0
+for each vertex v in V
+if (v.color = WHITE)
+DFS_r (G, v)
+DFS_r (G, u)
+time++
+u.dtime = time
+u.color = GRAY
+for each v in Adj(u)
+if (v.color == WHITE)
+v.pred = u
+DFS_r (G, v)
+u.color = BLACK
+time++
+u.endtime = time
+```
+
+![image](support/gr3.png){width=70%}
+
+![image](support/gr4.png){width=70%}
+\newpage
+
+```c
+g = graph_load (argv[1]);
+printf ("Initial vertex? ");
+scanf ("%d", &i);
+src = graph_find (g, i);
+graph_attribute_init (g);
+graph_dfs (g, src);
+graph_dispose (g);
+
+void graph_dfs (graph_t *g, vertex_t *n) {
+  int currTime=0;
+  vertex_t *tmp, *tmp2;
+  printf("List of edges:\n");
+  currTime = graph_dfs_r (g, n, currTime);
+  for (tmp=g->g; tmp!=NULL; tmp=tmp->next) {
+    if (tmp->color == WHITE) {
+      currTime = graph_dfs_r (g, tmp, currTime);
+    }
+  }
+  printf("List of vertices:\n");
+  for (tmp=g->g; tmp!=NULL; tmp=tmp->next) {
+    tmp2 = tmp->pred;
+    printf("%2d: %2d/%2d (%d)\n",
+        tmp->id, tmp->disc_time, tmp->endp_time,
+        (tmp2!=NULL) ? tmp->pred->id : -1);
+  }
+}
+
+int graph_dfs_r(graph_t *g, vertex_t *n, int currTime) {
+  edge_t *e;
+  vertex_t *t;
+  n->color = GREY;
+  n->disc_time = ++currTime;
+  e = n->head;
+  while (e != NULL) {
+    t = e->dst;
+    switch (tmp->color) {
+      case WHITE: printf("%d -> %d : T\n", n->id, t->id);
+                  break;
+      case GREY : printf("%d -> %d : B\n", n->id, t->id);
+                  break;
+      case BLACK:
+                  if (n->disc_time < t->disc_time) {
+                    printf("%d -> %d : F\n",n->disc_time,t->disc_time);
+                  } else {
+                    printf("%d -> %d : C\n", n->id, t->id);
+                  }
+    }
+    if (tmp->color == WHITE) {
+      tmp->pred = n;
+      currTime = graph_dfs_r (g, tmp, currTime);
+    }
+    e = e->next;
+  }
+  n->color = BLACK;
+  n->endp_time = ++currTime;
+  return currTime;
+}
+```
+
+\newpage
 
 # Pointers
 ```c
