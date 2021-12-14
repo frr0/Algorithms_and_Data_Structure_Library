@@ -2,35 +2,19 @@
 
 #define FIND 0
 
-static node_t *myAlloc (void);
+static node_t *myAlloc(void);
 #if FIND
-  static data_t findDeleteMax1 (node_t **);
+static data_t findDeleteMax1(node_t **);
 #endif
 #if !FIND
-  static node_t *findDeleteMax2 (data_t *, node_t *);
+static node_t *findDeleteMax2(data_t *, node_t *);
 #endif
 
-data_t
-getData (
-  node_t *node
-  )
-{
-  return (node->val);
-}
+data_t getData(node_t *node) { return (node->val); }
 
-node_t *
-createEmptyTree (
-  void
-  )
-{
-  return (NULL);
-}
+node_t *createEmptyTree(void) { return (NULL); }
 
-node_t *
-treeMinI (
-  node_t *rp
-  )
-{
+node_t *treeMinI(node_t *rp) {
   if (rp == NULL)
     return (rp);
 
@@ -41,22 +25,14 @@ treeMinI (
   return (rp);
 }
 
-node_t *
-treeMinR (
-  node_t *rp
-  )
-{
-  if (rp == NULL || rp->left==NULL)
+node_t *treeMinR(node_t *rp) {
+  if (rp == NULL || rp->left == NULL)
     return (rp);
 
-  return (treeMinR (rp->left));
+  return (treeMinR(rp->left));
 }
 
-node_t *
-treeMaxI (
-  node_t *rp
-  )
-{
+node_t *treeMaxI(node_t *rp) {
   if (rp == NULL)
     return (rp);
 
@@ -67,23 +43,14 @@ treeMaxI (
   return (rp);
 }
 
-node_t *
-treeMaxR (
-  node_t *rp
-  )
-{
-  if (rp == NULL || rp->right==NULL)
+node_t *treeMaxR(node_t *rp) {
+  if (rp == NULL || rp->right == NULL)
     return (rp);
 
-  return (treeMaxR (rp->right));
+  return (treeMaxR(rp->right));
 }
 
-node_t *
-searchI (
-  node_t *rp,
-  data_t data
-  )
-{
+node_t *searchI(node_t *rp, data_t data) {
   while (rp != NULL) {
     if (compare(rp->val, data) == 0)
       return (rp);
@@ -97,27 +64,17 @@ searchI (
   return (NULL);
 }
 
-node_t *
-searchR (
-  node_t *rp,
-  data_t data
-  )
-{
-  if (rp==NULL || compare(rp->val, data)==0)
+node_t *searchR(node_t *rp, data_t data) {
+  if (rp == NULL || compare(rp->val, data) == 0)
     return (rp);
 
   if (compare(data, rp->val) < 0)
-    return (searchR (rp->left, data));
+    return (searchR(rp->left, data));
   else
-    return (searchR (rp->right, data));
+    return (searchR(rp->right, data));
 }
 
-node_t *
-insert (
-  node_t *rp,
-  data_t data
-  )
-{
+node_t *insert(node_t *rp, data_t data) {
   node_t *p;
 
   /* Empty Tree: Found Position */
@@ -135,71 +92,56 @@ insert (
 
   if (compare(data, rp->val) < 0) {
     /* Insert on the left */
-    rp->left = insert (rp->left, data);
+    rp->left = insert(rp->left, data);
   } else {
     /* Insert on the right */
-    rp->right = insert (rp->right, data);
+    rp->right = insert(rp->right, data);
   }
 
   return (rp);
 }
 
-
-node_t *
-readTree (
-  FILE *fp
-  )
-{
+node_t *readTree(FILE *fp) {
   node_t *rp;
   data_t d;
 
-  rp = createEmptyTree ();
+  rp = createEmptyTree();
 
-  while (readData (fp, &d) != EOF) {
-    rp = insert (rp, d);
+  while (readData(fp, &d) != EOF) {
+    rp = insert(rp, d);
   }
 
   return (rp);
 }
 
-void
-freeTree (
-  node_t *rp
-  )
-{
+void freeTree(node_t *rp) {
   if (rp == NULL) {
     return;
   }
 
-  freeTree (rp->left);
-  freeTree (rp->right);
-  free (rp);
+  freeTree(rp->left);
+  freeTree(rp->right);
+  free(rp);
 
   return;
 }
 
-void
-writeTree (
-  FILE *fp,
-  node_t *rp,
-  int modo
-)
-{
+void writeTree(FILE *fp, node_t *rp, int modo) {
   if (rp == NULL) {
     return;
   }
 
   if (modo == PREORDER) {
-    writeData (fp, rp->val);
+    writeData(fp, rp->val);
   }
 
-  writeTree (fp, rp->left, modo);
+  writeTree(fp, rp->left, modo);
 
   if (modo == INORDER) {
     writeData(fp, rp->val);
   }
 
-  writeTree (fp, rp->right, modo);
+  writeTree(fp, rp->right, modo);
 
   if (modo == POSTORDER) {
     writeData(fp, rp->val);
@@ -208,13 +150,7 @@ writeTree (
   return;
 }
 
-
-node_t *
-delete (
-  node_t *rp,
-  data_t data
-  )
-{
+node_t *delete (node_t *rp, data_t data) {
   node_t *p;
 
   /* Empty Tree */
@@ -223,13 +159,13 @@ delete (
     return (rp);
   }
 
-  if (compare (data, rp->val) < 0) {
+  if (compare(data, rp->val) < 0) {
     /* Delete on the left sub-treee Recursively */
     rp->left = delete (rp->left, data);
     return (rp);
   }
 
-  if (compare(data, rp->val)> 0) {
+  if (compare(data, rp->val) > 0) {
     /* Delete on the rigth sub-treee Recursively */
     rp->right = delete (rp->right, data);
     return (rp);
@@ -240,26 +176,26 @@ delete (
   if (rp->right == NULL) {
     /* Empty Right Sub-Tree: Return Left Sub-Tree */
     rp = rp->left;
-    free (p);
+    free(p);
     return (rp);
   }
 
   if (rp->left == NULL) {
     /* Empty Left Sub-Tree: Return Right Sub-Tree */
     rp = rp->right;
-    free (p);
+    free(p);
     return rp;
   }
 
   /* Find Predecessor and Substitute */
 #if FIND
-  rp->val = findDeleteMax1 (&(rp->left));
+  rp->val = findDeleteMax1(&(rp->left));
 #endif
 #if !FIND
   {
     data_t val;
 
-    rp->left = findDeleteMax2 (&val, rp->left);
+    rp->left = findDeleteMax2(&val, rp->left);
     rp->val = val;
   }
 #endif
@@ -267,28 +203,20 @@ delete (
   return (rp);
 }
 
-static node_t *
-myAlloc (
-  void
-  )
-{
+static node_t *myAlloc(void) {
   node_t *p;
 
   p = (node_t *)malloc(sizeof(node_t));
   if (p == NULL) {
-    printf ("Allocation Error.\n");
-    exit (1);
+    printf("Allocation Error.\n");
+    exit(1);
   }
 
   return (p);
 }
 
 #if FIND
-static data_t
-findDeleteMax1 (
-  node_t **rpp
-  )
-{
+static data_t findDeleteMax1(node_t **rpp) {
   node_t *p;
   data_t d;
 
@@ -299,29 +227,24 @@ findDeleteMax1 (
   p = *rpp;
   d = p->val;
   *rpp = (*rpp)->left;
-  free (p);
+  free(p);
 
   return (d);
 }
 #endif
 
 #if !FIND
-static node_t *
-findDeleteMax2 (
-  data_t *d,
-  node_t *rp
-  )
-{
+static node_t *findDeleteMax2(data_t *d, node_t *rp) {
   node_t *tmp;
 
   if (rp->right == NULL) {
     *d = rp->val;
     tmp = rp->left;
-    free (rp);
+    free(rp);
     return (tmp);
   }
 
-  rp->right = findDeleteMax2 (d, rp->right);
+  rp->right = findDeleteMax2(d, rp->right);
   return (rp);
 }
 #endif

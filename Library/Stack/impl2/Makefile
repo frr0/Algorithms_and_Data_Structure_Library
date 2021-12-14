@@ -3,7 +3,6 @@ stack-int:
 	cp -R item-int.c ./item.c
 	gcc -Wall -g -o impl1 \
 	    client.c stack.c util.c item.c -lm
-	./impl1
 
 stack-string:
 	cp -R item-string.h ./item.h

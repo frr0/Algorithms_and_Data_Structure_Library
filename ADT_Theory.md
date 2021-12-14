@@ -42,10 +42,10 @@ Pointers are varibles whose values are memory addresses
 
 - The address operator, *
   - Returns the value of the object to which its operand (i.e., a pointer) points  
-  - ```*p = v = 5``` because it's openrand ```p``` points to ```v```
+  - `*p = v = 5` because it's openrand `p` points to `v`
 - The indirection operator, &
   - Given a variable, it takes its address
-  - Given ```*p = v = 5```  ```&v``` is the address of ```v```
+  - Given `*p = v = 5`  `&v` is the address of `v`
 
 ```c
 <type> *<pointer>;
@@ -61,8 +61,7 @@ pointer = &number;
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   int v = 5;
   int *p;
   p = &v;
