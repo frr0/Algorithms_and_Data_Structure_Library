@@ -115,8 +115,7 @@ p|It is the address of v that points to v|Warning! address 957891628
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   int v = 5;
   int *p;
   p = &v;
@@ -159,15 +158,7 @@ p|It is the address of v that points to v|Address 140735223946540
 &(*p)|p|Address 140735223946540
 
 
-<!-- ```mermaid -->
-<!-- graph LR -->
-<!--   Pointer --> Value -->
-<!-- ``` -->
-<!-- ```mermaid -->
-<!-- graph LR -->
-<!--   p=&v=140735223946540 --> *p=v=5 -->
-<!-- ``` -->
-> ```p``` is the pointer that points to ```v = 5``` (```*p``` means pointed by ```p```) whose address is ```p = &v = 140735223946540```
+> `p` is the pointer that points to `v = 5` (`*p` means pointed by `p`) whose address is `p = &v = 140735223946540`
 
 ---
 ### Example
@@ -175,8 +166,7 @@ p|It is the address of v that points to v|Address 140735223946540
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   float *ptr;
   float f = 7.5;
 
@@ -235,7 +225,7 @@ int *p2;
 p1 = &i;
 p1++;
 ```
-```p++``` makes the pointer points to next < type >, basically if int p++ means
+`p++` makes the pointer points to next < type >, basically if int p++ means
 next byte, if char, next bit...
 
 ```C
@@ -263,14 +253,17 @@ memory; this is often meaningless
 If p1==p2 also *p1==*p2
 
 ## By reference
+
 ### Wrong
-```C
+
+```c
 int i; j;
 
 swap (i, j);
 ```
 Here you change them locally only
-```C
+
+```c
 void swap (int x, int y) {
   int tmp;
   
@@ -284,13 +277,13 @@ void swap (int x, int y) {
 ### Correct
 
 you pass the pointer &i which is then pointed by x
-```C
+```c
 int i; j;
 
 swap (&i, &j);
 ```
 Here you pass the address
-```C
+```c
 void swap (int *x, int *y) {
   int tmp;
   
@@ -354,6 +347,7 @@ int strlen (char str[]) {
   return cnt;
 }
 ```
+ 
 ```c
 int strlen (char str[]) {
   int cnt;
@@ -367,6 +361,7 @@ int strlen (char str[]) {
   return cnt;
 }
 ```
+
 ```c
 int strlen (char *str) {
   int cnt;
@@ -378,6 +373,7 @@ int strlen (char *str) {
   return cnt;
 }
 ```
+
 ```c
 int strlen (char *str) {
   char *p;
@@ -390,10 +386,12 @@ int strlen (char *str) {
 ```
 
 ### Pointers and structures
+
 ```c
 pointer_to_structure->member_name
 (*pointer_to_structure).member_name
 ```
+
 ```c
 struct student {
   char s1[L], s2[L];
@@ -1596,6 +1594,17 @@ int main(){
 \newpage
 
 # Recursion
+
+## Complexity
+
+![image](support/rec0.png){width=50%}
+![image](support/rec1.png){width=50%}
+![image](support/rec2.png){width=50%}
+![image](support/rec3.png){width=50%}
+<!-- ![image](support/rec4.png){width=50%} -->
+![image](support/rec5.png){width=50%}
+![image](support/rec6.png){width=50%}
+![image](support/rec7.png){width=50%}
 
 \newpage
 
