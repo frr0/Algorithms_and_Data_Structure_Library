@@ -5,882 +5,6 @@ date: dicember 05, 2021
 ---
 \newpage
 
-# Sorting Algorithms
-
-## Insertion Sort
-
-> O(n^2)  
-Vector divided in left sorted and right unsorted, when there is a number higher in the left compared to another on the right they are switched
-
-|  0  |  1  |  2	|  3  |  4  |  5	|
-| --- | --- | --- | --- | --- | --- |
-|  4  |  2  |  6	|  3  |  1  |  5	|
-|  4  | (2) |  6	|  3  |  1  |  5	|
-|  2  |  4  |  6	|  3  |  1  |  5	|
-|  2  |  4  | (6) |  3  |  1  |  5	|
-|  2  |  4  |  6	|  3  |  1  |  5	|
-|  2  |  4  |  6	| (3) |  1  |  5	|
-|  2  |  3  |  4	|  6  |  1  |  5	|
-|  2  |  3  |  4	|  6  | (1) |  5	|
-|  1  |  2  |  3	|  4  |  6  | (5) |
-|  1  |  2  |  3	|  4  |  5  |  6	|
-
-```c
-//2 subarray
-//left is sorted, right not sorted     i=1 means
-//that the only sorted is in position 0.
-
-#include <stdio.h>
-
-void InsertionSort (int *A, int n);
-
-int main(int argc, char *argv[]) {
-  int n = 5;
-  int arr[5] = {3, 8, 1, 7, 4};
-
-  InsertionSort(arr, n);
-  for(int i=0; i<n; i++){
-    printf("%d ", arr[i]);
-  }
-  return 0;
-}
-
-void InsertionSort (int *A, int n) {
-	int i, j, x;
-	
-	for (i=1; i<n; i++) {
-		x = A[i];//first unsorted number
-		j = i - 1;//J=0: only sorted number
-		
-		while (j>=0 && x<A[j]) {
-			A[j+1] = A[j];//A[j] is not the smallest so it
-			j--;//j=-1  // has to let the other go to left ex A[j+1=1]
-		}
-
-		A[j+1] = x;//A[j+1=0]
-	}
-}
-```
-\newpage
-
-## Exchange Sort
-
-> O(n^2)  
-Vector divided in left unsorted and right sorted,  swap of any numbers with a smaller one on its right
-
-
-|  0  |  1  |  2	|  3  |  4  |  5	|
-| --- | --- | --- | --- | --- | --- |
-|  4  |  2  |  6	|  3  |  1  |  5	|
-|  2  |  4  |  3	|  1  |  5  |  [6]	|
-|  2  |  4  |  3	|  1  |  [5  |  6]	|
-|  2  |  1  |  3	|  4  |  [5  |  6]	|
-|  2  |  1  |  3	|  [4  |  5  |  6]	|
-|  2  |  1  |  [3	|  4  |  5  |  6]	|
-|  [1  |  2  |  3	|  4  |  5  |  6]	|
-
-```c
-//2 subarray.
-//left is unssorted, right is empty     i<n-1 means that you assume
-void BubbleSort (int A[], int n) {  //  at the beginning the last is
-  int i, j, temp;                   //  the greater.
-
-  for (i=0; i<n-1; i++) {
-    for (j=0; j<n-i-1; j++){        //j<n-1-i because the more you
-      if (A[j] > A[j+1]) {          // go on, less numbers you have left  
-        temp = A[j];
-        A[j] = A[j+1];
-        A[j+1] = temp;
-      }//in this for you find the greater unsorted
-    }  //number and swapping it, you put it on the right
-  }
-
-  return;
-}
-```
-\newpage
-
-## Selection Sort
-
-> O(n^2)  
-Vector divided in left sorted and right unsorted, the algorithm looks for the smallest number in the right unsorted array and swaps it wiht the first element of the unsorted array 
-
-|  0  |  1  |  2	|  3  |  4  |  5	|
-| --- | --- | --- | --- | --- | --- |
-| ](4) |  2  |  6	|  3  |  (1)|  5	|
-|  [1]  |  (2)|  6	|  3  |  4  |  5	|
-|  [1  |  2]  |  (6)	|  (3)  |  4  |  5	|
-|  [1  |  2  |  3]	|  (6)  |  (4)  |  5	|
-|  [1  |  2  |  3	|  4]  |  (6)  |  (5)	|
-|  [1  |  2  |  3	|  4  |  5  |  6]	|
-
-```c
-void SelectionSort (int A[], int n) {
-	int i, j, min, temp;
-	
-	for (i=0; i<n-1; i++) {
-		min = i;//first # is min
-		
-		for (j=i+1; j<n; j++) {   //it finds the smallest on the line 
-			if (A[j] < A[min]) {    //if the first on the right (A[j]) of the min num (A[min]) is less           
-				min = j;              //in that position there's the new smallest one
-			}
-		}                         //after this for you know which number is
-                              //the smallest of the line 
-		                          //end now you swap it with the one you
-		temp = A[i];              //assume to be the smallest (min=i  line 7)  
-		A[i] = A[min];
-		A[min] = temp;
-	}
-
-  return;
-}
-```
-\newpage
-
-## Shell Sort
-
-> O(n^2)  
-swap numbers at same index in different arrays with insertion sort
-
-|   0  |  1  |  2	|  3  |   4  |  5	|  6  |  7   |   8	|  9  |  10  |  11   |   12 |  13  |  14  |  15  |   16 |  17  |  18 	 |  h  |
-| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
-|7     |   6 |  8 | 9   |  8   |  6 |  2  |  1   |   8  |  7  |   0  | 4     |   5  |    3 |   0  |   1  |   0  |   4  |   9   |     |
-| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
-|  [3  |  0  |  1	|  0  |   4  |  6	|  2  |  1   |   5	|  7  |  3   |  4    |  5]  | [7   |  6 	|   8  |   9  |  8	 |  9]   |     |
-|  [I  |  II | III| IV  |   V  | VI | VII | VIII |  IX  |  X  |  XI  |  XII  | XIII]| [I   |  II  |  III |  IV  |   V  |  VI]  | 13  |
-| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
-|  [3  |  0  |  0	|  0] |  [4  |  6	|  1  |  1]  |  [5	|  7  |  2   |  4]   | [8   |  7   |  6 	|   8] |  [9  |  8	 |  9]   |     |
-|  [I  |  II | III| IV] |  [I  | II | III |  IV] |  [I  |  II | III  |  IV]  |  [I  |  II  | III  |  IV] |  [I  |  II  | III]  |  4  |  
-| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
-|   0  |  0  |  0	|  1  |   4  |  6	|  1  |  1   |   5	|  7  |  2   |  4    |  8   |  7   |  6 	|   8  |   9  |  8	 |  9    |  1  |
-
-
-```c
-void ShellSort (int A[], int n) {
-	int i, j, x, h;
-	h=1;
-
-	while (h < n/3)
-		h = 3*h+1;
-
-	while (h >= 1) {
-		for (i=h; i<n; i++) {
-			x = A[i];
-			j = i - h;
-
-			while (j>=0 && x<A[j]) {
-				A[j+h] = A[j];
-				j -= h;
-			}
-			
-			A[j+h] = x;
-		}
-
-		h = h/3;
-	}
-}
-```
-
-\newpage
-
-## Counting Sort
-
-> O(n^2)  
-There are multiple arrays, the given one, another with every single value that is in the previous array with in each cell has the number of times that number exist in the previous array. A third array with the cumulative number of element at each index. Another array with the previous array numbers shifted by 1 index to the right. At this point number 0 at index 0 is between position 0 and 1, 1 occurrence, number 1 at index 1 is between position 1 and 4, 3 occurrences in the last vectors, number 2 at index 2 is between position 4 and 4, 0 occurrences in the last vectors, and last number, 3 at index 3 is between position 4 and 6, 2 occurrences in the last array.  
-
-![Counting sort](support/count.png){width=70%}
-
-```c
-#define MAX 100
-
-void CountingSort(int A[], int n, int k) {
-	int i, C[MAX], B[MAX];
-
-	for (i=0; i<k; i++)
-		C[i] = 0;
-
-	for (i=0; i<n; i++)
-		C[A[i]]++;
-
-	for (i=1; i<k; i++)
-		C[i] += C[i-1];
-
-	for (i=n-1; i>=0; i--) 
-	{
-		B[C[A[i]]-1] = A[i];
-		C[A[i]]--;
-	}
-
-	for (i=0; i<n; i++)
-		A[i] = B[i];
-}
-
-```
-\newpage
-
-## Merge Sort
-
-> O(log_n(n))  
-It divides the array and then, when it merges back the numbers, it does it ordering them  
-
-![Merge sort](support/Schermata del 2021-12-05 19-05-54.png){width=55%}
-
-
-```c
-#include <stdlib.h>
-#include <stdio.h>
-
-#define max 100
-
-int insert_array(int V[]) {
-  int n, i;
-  printf("How many elements?: ");
-  scanf("%d", &n);
-
-  for (i=0; i<n; i++) {
-  	 printf("Element %d: ", i);
-  	    scanf("%d", &V[i]);
-  }
-  return(n);
-}
-
-void print_array(int V[], int n) {
-  int i;
-  for (i=0; i<n; i++) {
-    printf("%d ", V[i]);
-  }
-  printf("\n");
-  return;
-}
-
-void merge(int a[], int p, int q, int r) {
-  int i, j, k=0, b[max];
-  i = p;
-  j = q+1;
-
-  while (i<=q && j<=r) {
-    if (a[i]<a[j]) {
-      b[k] = a[i];
-      i++;
-    } else {
-      b[k] = a[j];
-      j++;
-    }
-    k++;
-  }
-  while (i <= q) {
-    b[k] = a[i];
-    i++;
-    k++;
-  }
-  while (j <= r) {
-    b[k] = a[j];
-    j++;
-    k++;
-  }
-  for (k=p; k<=r; k++)
-    a[k] = b[k-p];
-  return;
-}
-
-void mergeSort(int a[], int p, int r) {
-  int q;
-  if (p < r) {
-    q = (p+r)/2;
-    mergeSort(a, p, q);
-    mergeSort(a, q+1, r);
-    merge(a, p, q, r);
-  }
-  return;
-}
-
-int main(void) {
-  int n, V[max];
-  n = insert_array(V);
-  mergeSort(V, 0, n-1);
-  print_array(V, n);
-  return(0);
-}
-```
-\newpage
-
-## Quik Sort
-
-> O(log_n(n))  
-It divides the array and then, when it merges back the numbers, it does it ordering them  
-
-![Quick sort](support/QuickSort.png){width=45%}
-
-
-```c
-#include<stdio.h>
-
-void quicksort(int number[25],int first,int last){
-  int i, j, pivot, temp;
-  if(first<last){
-    pivot=first;
-    i=first;
-    j=last;
-    while(i<j){
-      while(number[i]<=number[pivot]&&i<last)
-        i++;
-      while(number[j]>number[pivot])
-        j--;
-      if(i<j){
-        temp=number[i];
-        number[i]=number[j];
-        number[j]=temp;
-      }
-    }
-    temp=number[pivot];
-    number[pivot]=number[j];
-    number[j]=temp;
-    quicksort(number,first,j-1);
-    quicksort(number,j+1,last);
-  }
-}
-int main(){
-  int i, count, number[25];
-  printf("Enter some elements (Max. - 25): ");
-  scanf("%d",&count);
-  printf("Enter %d elements: ", count);
-  for(i=0;i<count;i++)
-    scanf("%d",&number[i]);
-  quicksort(number,0,count-1);
-  printf("The Sorted Order is: ");
-  for(i=0;i<count;i++)
-    printf(" %d",number[i]);
-  return 0;
-}
-```
-\newpage
-
-# Complexity equation
-\newpage
-
-# Heap sort
-Data and Key
-
-```c
-struct heap_s {
-  Item *A;
-  int heapsize;
-} heap_t;
-```
-
-```
-#define LEFT(i) (2*i+1)
-#define RIGHT(i) (2*i+2)
-#define PARENT(i) ((int)(i-1)/2)
-```
-
-```c
-#define LEFT(i) (i<<1+1)
-#define RIGHT(i) (i<<1+2)
-#define PARENT(i) ((i-1)>>1)
-```
-
-```c
-heap->A[LEFT(i)]    //is its left child
-heap->A[RIGHT(i)]   //is its right child
-heap->A[PARENT(i)]  //is its parentd
-```
-```c
-heap->A[0]
-```
-
-![image](support/heap0.png){width=70%}
-
-the tree is filled in the array order
-
-largest on top, then has to be removed 
-
-```c
-void heapbuild (heap_t heap) {
-  int i;
-  for (i=(heap->heapsize)/2-1; i >= 0; i--) {
-    heapify (heap, i);
-  }
-  return;
-}
-```
-
-```c
-void heapify (heap_t heap, int i) {
-  int l, r, largest;
-  l = LEFT(i);
-  r = RIGHT(i);
-  if ((l<heap->heapsize) &&
-      (item_greater (heap->A[l], heap->A[i])))
-    largest = l;
-  else
-    largest = i;
-  if ((r<heap->heapsize)&&
-      (item_greater (heap->A[r], heap->A[largest])))
-    largest = r;
-  if (largest != i) {
-    swap (heap, i, largest);
-    heapify (heap, largest);
-  }
-  return;
-}
-```
-
-```c
-void heapsort (heap_t heap) {
-  int i, tmp;
-  heapbuild (heap);
-  tmp = heap->heapsize;
-  for (i=heap->heapsize-1; i>0; i--) {
-    swap (heap, 0, i);
-    heap->heapsize--;
-    heapify (heap,0);
-  }
-  heap->heapsize = tmp;
-  return;
-}
-```
-
-\newpage
-
-# Priority queue
-
-> $T(n) = O(log_2 n)$
-
-```c
-void pq_insert (PQ pq, Item item) {
-  int i;
-  i = pq->heapsize++;
-  while( (i>=1) &&
-      (item_less(pq->A[PARENT(i)], item)) )
-    pq->A[i] = pq->A[PARENT(i)];
-  i = PARENT (i);
-}
-pq->A[i] = item;
-return;
-}
-```
-
-```c
-Item pq_extract_max(PQ pq) {
-  Item item;
-  Extract max and move
-    last element into the
-    root node
-    swap (pq, 0, pq->heapsize-1);
-  item = pq->A[pq->heapsize-1];
-  pq->heapsize--;
-  heapify (pq, 0);
-  Reduce heap size
-}
-return item;
-```
-
-```c
-void pq_change (PQ pq, int i, Item item) {
-  if (item_less (item, pq->A[i]) {
-    decrease_key (pq, i);
-  } else {
-    increase_key (pq, i, item);
-  }
-}
-
-void decrease_key (PQ pq, int i) {
-  pq->A[i] = item;
-  heapify (pq, i);
-}
-
-void increase_key (PQ pq, int i) {
-  while( (i>=1) &&
-      (item_less(pq->A[PARENT(i)], item)) ) {
-    pq->A[i] = pq->A[PARENT(i)];
-    i = PARENT(i);
-  }
-  pq->A[i] = item;
-}
-```
-\newpage
-
-# Binary Search Tree
-![image](support/Preorder-from-Inorder-and-Postorder-traversals.jpg){width=70%}
-
-```c
-void writeTree(FILE *fp, node_t *rp, int modo) {
-  if (rp == NULL) {
-    return;
-  }
-
-  if (modo == PREORDER) {
-    writeData(fp, rp->data);
-  }
-
-  writeTree(fp, rp->left, modo);
-
-  if (modo == INORDER) {
-    writeData(fp, rp->data);
-  }
-
-  writeTree(fp, rp->right, modo);
-
-  if (modo == POSTORDER) {
-    writeData(fp, rp->data);
-  }
-
-  return;
-}
-
-```
-\newpage
-
-# Hash tables
-
-<!-- # Hash table -->
-## Linear chaining
-
-h'(k) = k % M
-
-## Open address
-
-N << M -> Load Factor = alpha = N / M
-
-## Linear Probing
-
-h'(k) = (h(k)+i) % M
-
-## quadratic Probing
-
-h'(k) = (h(k)+ c_1 * i + c_2 * i^2) % M
-
-## double hasing
-
-h'(k) = (h_1(k)+ i * h_2(k) ) % M
-
-## linear probing
-### example
-
-```
-A S E R C H I N G X M P
-
-a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  
-1 2 3 4 5 6 7 8 9 10 11 12  0  1  2  3  4  5  6  7  8  9 10 11 12  0   
-
-
-h'(k) = k % M = k % 13  
-h'(k) = (k % 13 + i) % 13  
-
-0 1 2 3 4 5 6 7 8 9 10 11 12  
-n a   c   e s r h i            
-```
-\newpage
-
-## quadratic probing
-### example
-```
-A S E R C H I N G X M P  
-
-a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26   
-1 2 3 4 5 6 7 8 9 10 11 12  0  1  2  3  4  5  6  7  8  9 10 11 12  0   
-
-
-    h'(k) = (h_1(k)+ i * h_2(k) ) % M  
-->  h'(k) = (h(k)+ c_1 * i + c_2 * i^2) % M  
-
-0 1 2 3 4 5 6 7 8 9 10 11 12  
-  a   c   e s   r             
-```
-
-# Greedy
-> Finding every solution is expensive
-
-At each step you look for the best
-
-It doesn't backtrack
-
-## Cost function
-
-* selected a priorit
-  - start from empty solution
-  - sort it
-  - choice
-* modifyiable during the process
-  - choice stored in priority queue
-
-![image](support/gr0.png){width=70%}
-
-```c
-typedef struct activity {
-  char name[MAX];
-  int start, stop;
-  int selected;
-} activity_t;
-  ...
-int cmp (const void *p1, const void *p2);
-  ...
-acts = load(argv[1], &n);
-qsort ((void *)acts, n, sizeof(activity_t), cmp);
-choose (acts, n);
-display (acts, n);
-  ...
-
-  int cmp (const void *p1, const
-      activity_t *a1 = (activity_t
-        activity_t *a2 = (activity_t
-          return a1->stop - a2->stop;
-          }
-          void choose (activity_t *acts,
-            int i, stop;
-            }
-            void *p2) {
-          *)p1;
-        *)p2;
-      int n) {
-    acts[0].selected = 1;
-    stop = acts[0].stop;
-    for (i=1; i<n; i++) {
-      if (acts[i].start >= stop) {
-        acts[i].selected = 1;
-        stop = acts[i].stop;
-      }
-    }
-```
-
-images tree...
-
-```c
-{
-  PQ *pq;
-  pq = pq_init (maxN, item_compare);
-  for (i=0; i<maxN; i++) {
-    printf ("Enter letter & frequency: ");
-    scanf ("%s %d", &letter, &freq);
-    tmp = item_new (letter, freq);
-    pq_insert (pq, tmp);
-  }
-
-  while (pq_size(pq) > 1) {
-    l = pq_extract_max (pq);
-    r = pq_extract_max (pq);
-    tmp = item_new ('!', l->freq + r->freq);
-    tmp->left = l;
-    tmp->right = r;
-    pq_insert (pq, tmp);
-  }
-  root = pq_extract_max (pq);
-  pq_display (root, code, 0);
-}
-```
-
-Complexity
-
-$$ T(n) = O(n * log_2 n) $$
-
-\newpage
-
-# Graphs
-Definition
-  - G = (V, E)
-  - V = Finite and non empty set of vertices (simple or complex data)
-  - E = Finite set of edges, that define a binary relation on V
-
-- Directed/Undirected graphs
-
-- Directed
-  - Edge = sorted pair of vertices (u, v) E and u, v  V
-- Undirected
-  - Edge = unsorted pair of vertices (u, v) E and u, v  V
-- Weighted
-  - each edge has a weight
-
-### Loops
-- A loop is defined as a path where
-  - v 0 =v k , the starting and arrival vertices do coincide
-- Self-loop
-  - Loops whose length is 1
-- A graphs without loops is called
-- acyclic
-
-\newpage
-
-# Graphs visit
-## Breadth-First Search (BFS)
-
-```c
-BFS (G, s)
-  for each vertex v in V
-    v.color = WHITE
-    v.dtime = inf
-    v.pred = NULL
-
-  queue_init (Q)
-  s.color = GRAY
-  s.dtime = 0
-  s.pred = NULL
-  queue_enqueue (Q, s)
-
-  while (!queue_empty (Q))
-    u = queue_dequeue (Q)
-    for each v in Adj(u)
-      if (v.color == WHITE)
-        vertex
-        v.color = GRAY
-        v.dtime = u.dtime + 1
-        v.pred = u
-        queue_enqueue (Q, v)
-
-    u.color = BLACK
-```
-
-![image](support/gr1.png){width=70%}
-
-![image](support/gr2.png){width=70%}
-
-\newpage
-
-```c
-g = graph_load(argv[1]);
-printf("Initial vertex? ");
-scanf("%d", &i);
-src = graph_find(g, i);
-
-graph_attribute_init (g);
-graph_bfs (g, src);
-
-n = g->g;
-printf ("List of vertices:\n");
-while (n != NULL) {
-  if (n->color != WHITE) {
-    printf("%2d: %d (%d)\n",
-        n->id, n->dist, n->pred ? n->pred->id : -1);
-  }
-  n = n->next;
-}
-graph_dispose(g);
-
-void graph_bfs (graph_t *g, vertex_t *n) {
-  queue_t *qp;
-  vertex_t *d;
-  edge_t *e;
-  qp = queue_init (g->nv);
-  n->color = GREY;
-  n->dist = 0;
-  n->pred = NULL;
-  queue_put (qp, (void *)n);
-
-  while (!queue_empty_m(qp)) {
-    queue_get(qp, (void **)&n);
-    e = n->head;
-    while (e != NULL) {
-      d = e->dst;
-      if (d->color == WHITE) {
-        d->color = GREY;
-        d->dist = n->dist + 1;
-        d->pred = n;
-        queue_put (qp, (void *)d);
-      }
-      e = e->next;
-    }
-    n->color = BLACK;
-  }
-  queue_dispose (qp, NULL);
-}
-```
-\newpage
-
-## Depth-First Search (DFS)
-
-```c
-DFS (G)
-for each vertex v in V
-v.color = WHITE
-v.dtime = v.endtime = inf
-v.pred = NULL
-time = 0
-for each vertex v in V
-if (v.color = WHITE)
-DFS_r (G, v)
-DFS_r (G, u)
-time++
-u.dtime = time
-u.color = GRAY
-for each v in Adj(u)
-if (v.color == WHITE)
-v.pred = u
-DFS_r (G, v)
-u.color = BLACK
-time++
-u.endtime = time
-```
-
-![image](support/gr3.png){width=70%}
-
-![image](support/gr4.png){width=70%}
-\newpage
-
-```c
-g = graph_load (argv[1]);
-printf ("Initial vertex? ");
-scanf ("%d", &i);
-src = graph_find (g, i);
-graph_attribute_init (g);
-graph_dfs (g, src);
-graph_dispose (g);
-
-void graph_dfs (graph_t *g, vertex_t *n) {
-  int currTime=0;
-  vertex_t *tmp, *tmp2;
-  printf("List of edges:\n");
-  currTime = graph_dfs_r (g, n, currTime);
-  for (tmp=g->g; tmp!=NULL; tmp=tmp->next) {
-    if (tmp->color == WHITE) {
-      currTime = graph_dfs_r (g, tmp, currTime);
-    }
-  }
-  printf("List of vertices:\n");
-  for (tmp=g->g; tmp!=NULL; tmp=tmp->next) {
-    tmp2 = tmp->pred;
-    printf("%2d: %2d/%2d (%d)\n",
-        tmp->id, tmp->disc_time, tmp->endp_time,
-        (tmp2!=NULL) ? tmp->pred->id : -1);
-  }
-}
-
-int graph_dfs_r(graph_t *g, vertex_t *n, int currTime) {
-  edge_t *e;
-  vertex_t *t;
-  n->color = GREY;
-  n->disc_time = ++currTime;
-  e = n->head;
-  while (e != NULL) {
-    t = e->dst;
-    switch (tmp->color) {
-      case WHITE: printf("%d -> %d : T\n", n->id, t->id);
-                  break;
-      case GREY : printf("%d -> %d : B\n", n->id, t->id);
-                  break;
-      case BLACK:
-                  if (n->disc_time < t->disc_time) {
-                    printf("%d -> %d : F\n",n->disc_time,t->disc_time);
-                  } else {
-                    printf("%d -> %d : C\n", n->id, t->id);
-                  }
-    }
-    if (tmp->color == WHITE) {
-      tmp->pred = n;
-      currTime = graph_dfs_r (g, tmp, currTime);
-    }
-    e = e->next;
-  }
-  n->color = BLACK;
-  n->endp_time = ++currTime;
-  return currTime;
-}
-```
-
-\newpage
-
 # Pointers
 ```c
 sizeof(char)=1
@@ -1375,7 +499,7 @@ It has 2 ** beacause
 mat[i] = (int **) malloc (r * sizeof (int*));
 ```
 
-![image](support/0.png)
+![image](support/0.png) {width=50%}
 
 - mat[i][j] or (mat[i])[j]
   - Indicates a single element
@@ -1387,7 +511,7 @@ mat[i] = (int **) malloc (r * sizeof (int*));
   - Indicates the entire matrix
   - It is a pointer to an array of pointers
 
-  ![image](support/1.png)
+  ![image](support/1.png) {width=50%}
 
   mat = &mat[0]; //same notaion as p = &v;
 
@@ -1416,7 +540,7 @@ mat[i] = (int **) malloc (r * sizeof (int*));
   }
 ```
 
-![image](support/2.png)
+![image](support/2.png){width=70%}  
 
 - As for 1D arrays, also 2D arrays may be made
 visible outside the environment in which they
@@ -1526,9 +650,7 @@ void free2d (char ***m, int r) {
 # List  
 
 ## Intro   
-<!-- # List    -->
    
-<!-- [toc]    -->
    
 Easy to delete and add in ahead, in the middle, in the tail   
   - FIFO or Stack   
@@ -1538,21 +660,10 @@ Easy to delete and add in ahead, in the middle, in the tail
   - Double-Linked List   
   - List of List   
    
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   a[val1] -->|val1->next| b[val2]    -->
-<!--   b[val2] -->|val2->next| c[val3]    -->
-<!--   c[val3] -->|val3->next| d[NULL]    -->
-<!--   ```    -->
-<!--   same as    -->
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   a[val1] -->b[val2]    -->
-<!--   b[val2] -->c[val3]    -->
-<!--   c[val3] -->d[NULL]    -->
-<!--   ```    -->
 ## Prototypes (Atomic operation)   
+
 ### Struct of a List   
+
 ```c   
 #include <stdio.h>   
 #include <stdlib.h>   
@@ -1564,7 +675,9 @@ typedef struct node_s {
   struct node_s *next;   
 } node_t;   
 ```   
+
 ## Function required to operate with list   
+
 ```c   
 /* function prototypes */   
 int read (void);   
@@ -1575,7 +688,9 @@ node_t *delete_last (node_t *head);
 node_t *delete (node_t *head, int val);   
 void display (node_t *head);   
 ```   
+
 ## Main   
+
 ```c   
 /*    
  *  main program   
@@ -1638,13 +753,17 @@ int read (void) {
 ```   
 
 ## List insertion   
+
 **Assigning a new value ```val``` to the ```p``` element in order to insert that element in the list**     
 **Malloc the struct**     
-![image](support/0.png)     
+
+![image](support/0.png){width=70%}  
+
 
 ### List visit     
 
-![image](support/1.png)     
+![image](support/1.png){width=70%}  
+
 ```c   
 /*   
  *  insert a value in the list (sorted)   
@@ -1656,22 +775,14 @@ node_t *insert (node_t *head, int val) {
   p->val = val;   
   p->next = NULL;   
 ```   
+
 ### Head insertion   
-```p``` insertion ```ahead```     
-```O(n)``` cost   
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   &head -->    -->
-<!--   val1_/_next -->val2_/_next    -->
-<!--   val2_/_next -->val3_/_next    -->
-<!--   ```    -->
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   p_/_next -->    -->
-<!--   val1_/_next -->val2_/_next    -->
-<!--   val2_/_next -->val3_/_next    -->
-  ```   
-![image](support/5.png)   
+
+`p` insertion `ahead`     
+`O(n)` cost   
+
+![image](support/5.png) {width=70%}   
+
 ```c   
    
   /* insert ahead */   
@@ -1682,18 +793,17 @@ node_t *insert (node_t *head, int val) {
   }   
 ```   
 ### In-order insertion   
-![image](support/6.png)   
-```new->next = p->next```     
-```p->next = new```   
-### Middle/Tail insertion   
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   val1_/_next -->p_/_next    -->
-<!--   p_/_next -->val3_/_next    -->
-<!--   val1_/_next -->val3_/_next    -->
-  ```   
-```p->next = val1->next```     
-```val1->next = p```   
+
+![image](support/6.png) {width=70%}    
+
+`new->next = p->next`     
+`p->next = new`   
+
+### Middle Tail insertion   
+
+`p->next = val1->next`     
+`val1->next = p`   
+
 ```c   
   /*    
    *  scan the list with the q pointer in order to find    
@@ -1708,36 +818,25 @@ node_t *insert (node_t *head, int val) {
 }   
 ```   
 #### Tail insertion   
-```Tail insertion``` is basically ```middle insertion```     
-<!-- **Middle:**    -->
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   a[val1] -->|val1->next| b[p]    -->
-<!--   b[p] -->|p->next| c[val2]    -->
-<!--   a[val1] -->|val1->next| c[val2]    -->
-<!--   ```    -->
-```p->next = val1->next```     
-```val1->next = p```     
+
+`Tail insertion` is basically `middle insertion`     
+`p->next = val1->next`     
+`val1->next = p`     
    
-<!-- ---    -->
-<!-- **Tail:**    -->
-<!-- ```mermaid    -->
-<!-- graph LR    -->
-<!--   a[val1] -->|val1->next| b[p]    -->
-<!--   b[p] -->|p->next| c[NULL]    -->
-<!--   a[val1] -->|val1->next| c[NULL]    -->
-<!--   ```    -->
-```p->next = val1->next```     
-```val1->next = p```     
+`p->next = val1->next`
+`val1->next = p`  
 or     
-```p->next = NULL```     
-```val1->next = p```   
-![image](support/7.png)     
+`p->next = NULL`
+`val1->next = p`
+
+![image](support/7.png){width=70%}       
 
 ## List searching     
 
-if ```p->key == value``` you exit and unless ```p == NULL``` you're good in your element of the list     
-![image](support/2.png)    
+if `p->key == value` you exit and unless `p == NULL` you're good in your element of the list     
+
+![image](support/2.png) {width=70%}     
+
 ```c   
 /*   
  *  search a value in the list   
@@ -1757,26 +856,34 @@ void search (node_t *head, int val) {
 ```   
    
 ## List extraction   
-than you free ```p```   
-![image](support/3.png)   
-```p = head```     
-```head = head->next```     
+
+than you free `p`   
+
+![image](support/3.png) {width=70%}    
+
+`p = head`     
+`head = head->next`     
 if there's only one element     
-```p = head```     
-```head = NULL```   
+`p = head`     
+`head = NULL`   
    
 ### In-order Extraction   
-```p = q->next```     
-```q->next = p->next```     
+
+`p = q->next`     
+`q->next = p->next`     
 or     
-```q->next = q->next->next```     
+`q->next = q->next->next`     
    
-```p``` is only not to lose forever that element (red one), without step 1 I lose reference to elements and at the end ov the program I have many leaks. If I lose the reference I can not free it.   
-![image](support/4.png)   
+`p` is only not to lose forever that element (red one), without step 1 I lose reference to elements and at the end ov the program I have many leaks. If I lose the reference I can not free it.   
+
+![image](support/4.png) {width=70%}    
    
 ## List deletion (Free)   
+
 ### Free the entire list   
-![image](support/8.png)   
+
+![image](support/8.png){width=70%}     
+
 ```c   
 while (head !=0){   
   p = head;   
@@ -1784,7 +891,9 @@ while (head !=0){
   free (p);   
 }   
 ```   
+
 ### Deleting first element   
+
 ```c   
 /*   
  *  delete the first element of the list   
@@ -1802,7 +911,9 @@ node_t *delete_first (node_t *head) {
   return head;   
 }   
 ```   
+
 ### Deleting a particular element   
+
 ```c   
 /*   
  *  delete a list element, keeping it sorted   
@@ -1845,7 +956,9 @@ node_t *delete (node_t *head, int val) {
     return NULL;   
   }   
 ```   
+
 ### Deleting ahead   
+
 ```c   
   /* delete ahead */   
   if (val == head->val) {   
@@ -1854,7 +967,9 @@ node_t *delete (node_t *head, int val) {
     return p;   
   }   
 ```   
+
 ## Scan to find an elemet to delete it   
+
 ```c   
   /*    
    *  scan the list with the q pointer in order to find    
@@ -1876,6 +991,7 @@ node_t *delete (node_t *head, int val) {
 ```   
 
 ## Display list   
+
 ```c   
 /*   
  *  display the list contents   
@@ -1891,9 +1007,13 @@ void display (node_t *head) {
 ```   
    
 ## Sentinel   
-You don't check for ```null```   
-![image](support/9.png)   
-![image](support/10.png)   
+
+You don't check for `null`   
+
+![image](support/9.png) {width=70%}    
+
+![image](support/10.png) {width=70%}    
+
 ```c   
 sentinel->key = value;   
 p = head;   
@@ -1919,6 +1039,7 @@ so you reuse the array instead of use a matrix
 ### Enqueue  
 
 ![image](support/12.png){width=70%}  
+
 ![image](support/11.png){width=70%}  
 
 ### Dequeue  
@@ -1951,6 +1072,7 @@ return (tail);
 ```
 
 ## Ordered Linked Lists  
+
 ```c  
 do {  
   ...  
@@ -1965,35 +1087,38 @@ head = extract (head, val);
   
 ```c  
 list_t *dequeue (list_t *tail, int *val, int *status) {  
-list_t *old;  
-if (tail != NULL) {  
-*status = SUCCESS;  
-the self-loop) must be  
-if (tail == tail->next) {  
-implemented aside  
-*val = tail->key;  
-free (tail);  
-tail  
-10  
-tail = NULL;  
-} else {  
-old = tail->next;  
-*val = old->key;  
-tail  
-X  
-tail->next = old->next;  
-free (old);  
-}  
-} else {  
-*status = FAILURE;  
-}  
-return (tail);  
+  list_t *old;  
+  if (tail != NULL) {  
+    *status = SUCCESS;  
+    the self-loop) must be  
+      if (tail == tail->next) {  
+        implemented aside  
+          *val = tail->key;  
+        free (tail);  
+        tail  
+          10  
+          tail = NULL;  
+      } else {  
+        old = tail->next;  
+        *val = old->key;  
+        tail  
+          X  
+          tail->next = old->next;  
+        free (old);  
+      }  
+  } else {  
+    *status = FAILURE;  
+  }  
+  return (tail);  
 }  
 ```  
 
 #### search  
+
 ![image](support/14.png){width=70%}  
+
 **linear cosst, not logaritmic, so, don't use at the examination**  
+
 A search can terminate
 - Successfully, when we find the key
 - Unsuccessfully when a record with a key larger (or
@@ -2033,8 +1158,11 @@ the comparison
 
 
 ![image](support/15.png){width=70%}  
+
 ![image](support/16.png){width=70%}  
+
 ![image](support/17.png){width=70%}  
+
 ```c
 list_t *insert (list_t *head, int val) {
   list_t *p, *q=head;
@@ -2076,10 +1204,13 @@ list_t *extract (list_t *head, int val) {
   }
 }
 ```
+
 ![image](support/18.png){width=70%}  
   
 #### Double linked list  
+
 \newpage
+
 ![image](support/19.png){width=70%}  
 
 #### List of List  
@@ -2093,6 +1224,7 @@ list_t *extract (list_t *head, int val) {
 you can extract from head1 and you insert in head2 lifo? with a head insertion
 
 solution  
+
 ![image](support/22.png){width=70%}
 
 ```c
@@ -2110,9 +1242,900 @@ Head extrction and in order insertion
 
 \newpage
 
-# List library 
+# Sorting Algorithms
 
-## Stack
+## Insertion Sort
+
+> O(n^2)  
+Vector divided in left sorted and right unsorted, when there is a number higher in the left compared to another on the right they are switched
+
+|  0  |  1  |  2	|  3  |  4  |  5	|
+| --- | --- | --- | --- | --- | --- |
+|  4  |  2  |  6	|  3  |  1  |  5	|
+|  4  | (2) |  6	|  3  |  1  |  5	|
+|  2  |  4  |  6	|  3  |  1  |  5	|
+|  2  |  4  | (6) |  3  |  1  |  5	|
+|  2  |  4  |  6	|  3  |  1  |  5	|
+|  2  |  4  |  6	| (3) |  1  |  5	|
+|  2  |  3  |  4	|  6  |  1  |  5	|
+|  2  |  3  |  4	|  6  | (1) |  5	|
+|  1  |  2  |  3	|  4  |  6  | (5) |
+|  1  |  2  |  3	|  4  |  5  |  6	|
+
+```c
+//2 subarray
+//left is sorted, right not sorted     i=1 means
+//that the only sorted is in position 0.
+
+#include <stdio.h>
+
+void InsertionSort (int *A, int n);
+
+int main(int argc, char *argv[]) {
+  int n = 5;
+  int arr[5] = {3, 8, 1, 7, 4};
+
+  InsertionSort(arr, n);
+  for(int i=0; i<n; i++){
+    printf("%d ", arr[i]);
+  }
+  return 0;
+}
+
+void InsertionSort (int *A, int n) {
+	int i, j, x;
+	
+	for (i=1; i<n; i++) {
+		x = A[i];//first unsorted number
+		j = i - 1;//J=0: only sorted number
+		
+		while (j>=0 && x<A[j]) {
+			A[j+1] = A[j];//A[j] is not the smallest so it
+			j--;//j=-1  // has to let the other go to left ex A[j+1=1]
+		}
+
+		A[j+1] = x;//A[j+1=0]
+	}
+}
+```
+\newpage
+
+## Exchange Sort
+
+> O(n^2)  
+Vector divided in left unsorted and right sorted,  swap of any numbers with a smaller one on its right
+
+
+|  0  |  1  |  2	|  3  |  4  |  5	|
+| --- | --- | --- | --- | --- | --- |
+|  4  |  2  |  6	|  3  |  1  |  5	|
+|  2  |  4  |  3	|  1  |  5  |  [6]	|
+|  2  |  4  |  3	|  1  |  [5  |  6]	|
+|  2  |  1  |  3	|  4  |  [5  |  6]	|
+|  2  |  1  |  3	|  [4  |  5  |  6]	|
+|  2  |  1  |  [3	|  4  |  5  |  6]	|
+|  [1  |  2  |  3	|  4  |  5  |  6]	|
+
+```c
+//2 subarray.
+//left is unssorted, right is empty     i<n-1 means that you assume
+void BubbleSort (int A[], int n) {  //  at the beginning the last is
+  int i, j, temp;                   //  the greater.
+
+  for (i=0; i<n-1; i++) {
+    for (j=0; j<n-i-1; j++){        //j<n-1-i because the more you
+      if (A[j] > A[j+1]) {          // go on, less numbers you have left  
+        temp = A[j];
+        A[j] = A[j+1];
+        A[j+1] = temp;
+      }//in this for you find the greater unsorted
+    }  //number and swapping it, you put it on the right
+  }
+
+  return;
+}
+```
+\newpage
+
+## Selection Sort
+
+> O(n^2)  
+Vector divided in left sorted and right unsorted, the algorithm looks for the smallest number in the right unsorted array and swaps it wiht the first element of the unsorted array 
+
+|  0  |  1  |  2	|  3  |  4  |  5	|
+| --- | --- | --- | --- | --- | --- |
+| ](4) |  2  |  6	|  3  |  (1)|  5	|
+|  [1]  |  (2)|  6	|  3  |  4  |  5	|
+|  [1  |  2]  |  (6)	|  (3)  |  4  |  5	|
+|  [1  |  2  |  3]	|  (6)  |  (4)  |  5	|
+|  [1  |  2  |  3	|  4]  |  (6)  |  (5)	|
+|  [1  |  2  |  3	|  4  |  5  |  6]	|
+
+```c
+void SelectionSort (int A[], int n) {
+	int i, j, min, temp;
+	
+	for (i=0; i<n-1; i++) {
+		min = i;//first # is min
+		
+		for (j=i+1; j<n; j++) {   //it finds the smallest on the line 
+			if (A[j] < A[min]) {    //if the first on the right (A[j]) of the min num (A[min]) is less           
+				min = j;              //in that position there's the new smallest one
+			}
+		}                         //after this for you know which number is
+                              //the smallest of the line 
+		                          //end now you swap it with the one you
+		temp = A[i];              //assume to be the smallest (min=i  line 7)  
+		A[i] = A[min];
+		A[min] = temp;
+	}
+
+  return;
+}
+```
+\newpage
+
+## Shell Sort
+
+> O(n^2)  
+swap numbers at same index in different arrays with insertion sort
+
+|   0  |  1  |  2	|  3  |   4  |  5	|  6  |  7   |   8	|  9  |  10  |  11   |   12 |  13  |  14  |  15  |   16 |  17  |  18 	 |  h  |
+| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
+|7     |   6 |  8 | 9   |  8   |  6 |  2  |  1   |   8  |  7  |   0  | 4     |   5  |    3 |   0  |   1  |   0  |   4  |   9   |     |
+| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
+|  [3  |  0  |  1	|  0  |   4  |  6	|  2  |  1   |   5	|  7  |  3   |  4    |  5]  | [7   |  6 	|   8  |   9  |  8	 |  9]   |     |
+|  [I  |  II | III| IV  |   V  | VI | VII | VIII |  IX  |  X  |  XI  |  XII  | XIII]| [I   |  II  |  III |  IV  |   V  |  VI]  | 13  |
+| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
+|  [3  |  0  |  0	|  0] |  [4  |  6	|  1  |  1]  |  [5	|  7  |  2   |  4]   | [8   |  7   |  6 	|   8] |  [9  |  8	 |  9]   |     |
+|  [I  |  II | III| IV] |  [I  | II | III |  IV] |  [I  |  II | III  |  IV]  |  [I  |  II  | III  |  IV] |  [I  |  II  | III]  |  4  |  
+| ---  | --- | ---| --- | ---  |--- | --- | ---  |---   | --- | ---  | ---   |---   |---   |---   |---   |---   | ---  | ---   | --- |
+|   0  |  0  |  0	|  1  |   4  |  6	|  1  |  1   |   5	|  7  |  2   |  4    |  8   |  7   |  6 	|   8  |   9  |  8	 |  9    |  1  |
+
+
+```c
+void ShellSort (int A[], int n) {
+	int i, j, x, h;
+	h=1;
+
+	while (h < n/3)
+		h = 3*h+1;
+
+	while (h >= 1) {
+		for (i=h; i<n; i++) {
+			x = A[i];
+			j = i - h;
+
+			while (j>=0 && x<A[j]) {
+				A[j+h] = A[j];
+				j -= h;
+			}
+			
+			A[j+h] = x;
+		}
+
+		h = h/3;
+	}
+}
+```
+
+\newpage
+
+## Counting Sort
+
+> O(n^2)  
+There are multiple arrays, the given one, another with every single value that is in the previous array with in each cell has the number of times that number exist in the previous array. A third array with the cumulative number of element at each index. Another array with the previous array numbers shifted by 1 index to the right. At this point number 0 at index 0 is between position 0 and 1, 1 occurrence, number 1 at index 1 is between position 1 and 4, 3 occurrences in the last vectors, number 2 at index 2 is between position 4 and 4, 0 occurrences in the last vectors, and last number, 3 at index 3 is between position 4 and 6, 2 occurrences in the last array.  
+
+![Counting sort](support/count.png){width=70%}
+
+```c
+#define MAX 100
+
+void CountingSort(int A[], int n, int k) {
+	int i, C[MAX], B[MAX];
+
+	for (i=0; i<k; i++)
+		C[i] = 0;
+
+	for (i=0; i<n; i++)
+		C[A[i]]++;
+
+	for (i=1; i<k; i++)
+		C[i] += C[i-1];
+
+	for (i=n-1; i>=0; i--) 
+	{
+		B[C[A[i]]-1] = A[i];
+		C[A[i]]--;
+	}
+
+	for (i=0; i<n; i++)
+		A[i] = B[i];
+}
+
+```
+\newpage
+
+## Merge Sort
+
+> O(log_n(n))  
+It divides the array and then, when it merges back the numbers, it does it ordering them  
+
+![Merge sort](support/Schermata del 2021-12-05 19-05-54.png){width=55%}
+
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+
+#define max 100
+
+int insert_array(int V[]) {
+  int n, i;
+  printf("How many elements?: ");
+  scanf("%d", &n);
+
+  for (i=0; i<n; i++) {
+  	 printf("Element %d: ", i);
+  	    scanf("%d", &V[i]);
+  }
+  return(n);
+}
+
+void print_array(int V[], int n) {
+  int i;
+  for (i=0; i<n; i++) {
+    printf("%d ", V[i]);
+  }
+  printf("\n");
+  return;
+}
+
+void merge(int a[], int p, int q, int r) {
+  int i, j, k=0, b[max];
+  i = p;
+  j = q+1;
+
+  while (i<=q && j<=r) {
+    if (a[i]<a[j]) {
+      b[k] = a[i];
+      i++;
+    } else {
+      b[k] = a[j];
+      j++;
+    }
+    k++;
+  }
+  while (i <= q) {
+    b[k] = a[i];
+    i++;
+    k++;
+  }
+  while (j <= r) {
+    b[k] = a[j];
+    j++;
+    k++;
+  }
+  for (k=p; k<=r; k++)
+    a[k] = b[k-p];
+  return;
+}
+
+void mergeSort(int a[], int p, int r) {
+  int q;
+  if (p < r) {
+    q = (p+r)/2;
+    mergeSort(a, p, q);
+    mergeSort(a, q+1, r);
+    merge(a, p, q, r);
+  }
+  return;
+}
+
+int main(void) {
+  int n, V[max];
+  n = insert_array(V);
+  mergeSort(V, 0, n-1);
+  print_array(V, n);
+  return(0);
+}
+```
+\newpage
+
+## Quik Sort
+
+> O(log_n(n))  
+It divides the array and then, when it merges back the numbers, it does it ordering them  
+
+![Quick sort](support/QuickSort.png){width=45%}
+
+
+```c
+#include<stdio.h>
+
+void quicksort(int number[25],int first,int last){
+  int i, j, pivot, temp;
+  if(first<last){
+    pivot=first;
+    i=first;
+    j=last;
+    while(i<j){
+      while(number[i]<=number[pivot]&&i<last)
+        i++;
+      while(number[j]>number[pivot])
+        j--;
+      if(i<j){
+        temp=number[i];
+        number[i]=number[j];
+        number[j]=temp;
+      }
+    }
+    temp=number[pivot];
+    number[pivot]=number[j];
+    number[j]=temp;
+    quicksort(number,first,j-1);
+    quicksort(number,j+1,last);
+  }
+}
+int main(){
+  int i, count, number[25];
+  printf("Enter some elements (Max. - 25): ");
+  scanf("%d",&count);
+  printf("Enter %d elements: ", count);
+  for(i=0;i<count;i++)
+    scanf("%d",&number[i]);
+  quicksort(number,0,count-1);
+  printf("The Sorted Order is: ");
+  for(i=0;i<count;i++)
+    printf(" %d",number[i]);
+  return 0;
+}
+```
+\newpage
+
+# Complexity equation
+\newpage
+
+# Recursion
+
+\newpage
+
+# Heap sort
+Data and Key
+
+```c
+struct heap_s {
+  Item *A;
+  int heapsize;
+} heap_t;
+```
+
+```
+#define LEFT(i) (2*i+1)
+#define RIGHT(i) (2*i+2)
+#define PARENT(i) ((int)(i-1)/2)
+```
+
+```c
+#define LEFT(i) (i<<1+1)
+#define RIGHT(i) (i<<1+2)
+#define PARENT(i) ((i-1)>>1)
+```
+
+```c
+heap->A[LEFT(i)]    //is its left child
+heap->A[RIGHT(i)]   //is its right child
+heap->A[PARENT(i)]  //is its parentd
+```
+```c
+heap->A[0]
+```
+
+![image](support/heap0.png){width=70%}  
+
+the tree is filled in the array order
+
+largest on top, then has to be removed 
+
+## Implementation
+
+```c
+void heapbuild (heap_t heap) {
+  int i;
+  for (i=(heap->heapsize)/2-1; i >= 0; i--) {
+    heapify (heap, i);
+  }
+  return;
+}
+```
+
+```c
+void heapify (heap_t heap, int i) {
+  int l, r, largest;
+  l = LEFT(i);
+  r = RIGHT(i);
+  if ((l<heap->heapsize) &&
+      (item_greater (heap->A[l], heap->A[i])))
+    largest = l;
+  else
+    largest = i;
+  if ((r<heap->heapsize)&&
+      (item_greater (heap->A[r], heap->A[largest])))
+    largest = r;
+  if (largest != i) {
+    swap (heap, i, largest);
+    heapify (heap, largest);
+  }
+  return;
+}
+```
+
+```c
+void heapsort (heap_t heap) {
+  int i, tmp;
+  heapbuild (heap);
+  tmp = heap->heapsize;
+  for (i=heap->heapsize-1; i>0; i--) {
+    swap (heap, 0, i);
+    heap->heapsize--;
+    heapify (heap,0);
+  }
+  heap->heapsize = tmp;
+  return;
+}
+```
+
+\newpage
+
+# Priority queue
+
+> $T(n) = O(log_2 n)$
+
+## Implementation
+
+```c
+void pq_insert (PQ pq, Item item) {
+  int i;
+  i = pq->heapsize++;
+  while( (i>=1) &&
+      (item_less(pq->A[PARENT(i)], item)) )
+    pq->A[i] = pq->A[PARENT(i)];
+  i = PARENT (i);
+}
+pq->A[i] = item;
+return;
+}
+```
+
+```c
+Item pq_extract_max(PQ pq) {
+  Item item;
+  Extract max and move
+    last element into the
+    root node
+    swap (pq, 0, pq->heapsize-1);
+  item = pq->A[pq->heapsize-1];
+  pq->heapsize--;
+  heapify (pq, 0);
+  Reduce heap size
+}
+return item;
+```
+
+```c
+void pq_change (PQ pq, int i, Item item) {
+  if (item_less (item, pq->A[i]) {
+    decrease_key (pq, i);
+  } else {
+    increase_key (pq, i, item);
+  }
+}
+
+void decrease_key (PQ pq, int i) {
+  pq->A[i] = item;
+  heapify (pq, i);
+}
+
+void increase_key (PQ pq, int i) {
+  while( (i>=1) &&
+      (item_less(pq->A[PARENT(i)], item)) ) {
+    pq->A[i] = pq->A[PARENT(i)];
+    i = PARENT(i);
+  }
+  pq->A[i] = item;
+}
+```
+\newpage
+
+# Binary Search Tree
+
+![image](support/Preorder-from-Inorder-and-Postorder-traversals.jpg){width=70%}
+
+## Implementation
+
+```c
+void writeTree(FILE *fp, node_t *rp, int modo) {
+  if (rp == NULL) {
+    return;
+  }
+
+  if (modo == PREORDER) {
+    writeData(fp, rp->data);
+  }
+
+  writeTree(fp, rp->left, modo);
+
+  if (modo == INORDER) {
+    writeData(fp, rp->data);
+  }
+
+  writeTree(fp, rp->right, modo);
+
+  if (modo == POSTORDER) {
+    writeData(fp, rp->data);
+  }
+
+  return;
+}
+
+```
+\newpage
+
+# Hash tables
+
+<!-- # Hash table -->
+## Linear chaining
+
+h'(k) = k % M
+
+## Open address
+
+N << M -> Load Factor = alpha = N / M
+
+## Linear Probing
+
+h'(k) = (h(k)+i) % M
+
+## quadratic Probing
+
+h'(k) = (h(k)+ c_1 * i + c_2 * i^2) % M
+
+## double hasing
+
+h'(k) = (h_1(k)+ i * h_2(k) ) % M
+
+## linear probing
+### example
+
+```
+A S E R C H I N G X M P
+
+a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26  
+1 2 3 4 5 6 7 8 9 10 11 12  0  1  2  3  4  5  6  7  8  9 10 11 12  0   
+
+
+h'(k) = k % M = k % 13  
+h'(k) = (k % 13 + i) % 13  
+
+0 1 2 3 4 5 6 7 8 9 10 11 12  
+n a   c   e s r h i            
+```
+\newpage
+
+## quadratic probing
+### example
+```
+A S E R C H I N G X M P  
+
+a b c d e f g h i j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z  
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26   
+1 2 3 4 5 6 7 8 9 10 11 12  0  1  2  3  4  5  6  7  8  9 10 11 12  0   
+
+
+    h'(k) = (h_1(k)+ i * h_2(k) ) % M  
+->  h'(k) = (h(k)+ c_1 * i + c_2 * i^2) % M  
+
+0 1 2 3 4 5 6 7 8 9 10 11 12  
+  a   c   e s   r             
+```
+
+# Greedy
+> Finding every solution is expensive
+
+At each step you look for the best
+
+It doesn't backtrack
+
+## Cost function
+
+* selected a priorit
+  - start from empty solution
+  - sort it
+  - choice
+* modifyiable during the process
+  - choice stored in priority queue
+
+![image](support/gr0.png){width=70%}
+
+```c
+typedef struct activity {
+  char name[MAX];
+  int start, stop;
+  int selected;
+} activity_t;
+  ...
+int cmp (const void *p1, const void *p2);
+  ...
+acts = load(argv[1], &n);
+qsort ((void *)acts, n, sizeof(activity_t), cmp);
+choose (acts, n);
+display (acts, n);
+  ...
+
+  int cmp (const void *p1, const
+      activity_t *a1 = (activity_t
+        activity_t *a2 = (activity_t
+          return a1->stop - a2->stop;
+          }
+          void choose (activity_t *acts,
+            int i, stop;
+            }
+            void *p2) {
+          *)p1;
+        *)p2;
+      int n) {
+    acts[0].selected = 1;
+    stop = acts[0].stop;
+    for (i=1; i<n; i++) {
+      if (acts[i].start >= stop) {
+        acts[i].selected = 1;
+        stop = acts[i].stop;
+      }
+    }
+```
+
+images tree...
+
+```c
+{
+  PQ *pq;
+  pq = pq_init (maxN, item_compare);
+  for (i=0; i<maxN; i++) {
+    printf ("Enter letter & frequency: ");
+    scanf ("%s %d", &letter, &freq);
+    tmp = item_new (letter, freq);
+    pq_insert (pq, tmp);
+  }
+
+  while (pq_size(pq) > 1) {
+    l = pq_extract_max (pq);
+    r = pq_extract_max (pq);
+    tmp = item_new ('!', l->freq + r->freq);
+    tmp->left = l;
+    tmp->right = r;
+    pq_insert (pq, tmp);
+  }
+  root = pq_extract_max (pq);
+  pq_display (root, code, 0);
+}
+```
+
+Complexity
+
+$$ T(n) = O(n * log_2 n) $$
+
+\newpage
+
+# Graphs
+Definition
+  - G = (V, E)
+  - V = Finite and non empty set of vertices (simple or complex data)
+  - E = Finite set of edges, that define a binary relation on V
+
+- Directed/Undirected graphs
+
+- Directed
+  - Edge = sorted pair of vertices (u, v) E and u, v  V
+- Undirected
+  - Edge = unsorted pair of vertices (u, v) E and u, v  V
+- Weighted
+  - each edge has a weight
+
+### Loops
+- A loop is defined as a path where
+  - v 0 =v k , the starting and arrival vertices do coincide
+- Self-loop
+  - Loops whose length is 1
+- A graphs without loops is called
+- acyclic
+
+\newpage
+
+# Graphs visit
+## Breadth-First Search (BFS)
+
+```c
+BFS (G, s)
+  for each vertex v in V
+    v.color = WHITE
+    v.dtime = inf
+    v.pred = NULL
+
+  queue_init (Q)
+  s.color = GRAY
+  s.dtime = 0
+  s.pred = NULL
+  queue_enqueue (Q, s)
+
+  while (!queue_empty (Q))
+    u = queue_dequeue (Q)
+    for each v in Adj(u)
+      if (v.color == WHITE)
+        vertex
+        v.color = GRAY
+        v.dtime = u.dtime + 1
+        v.pred = u
+        queue_enqueue (Q, v)
+
+    u.color = BLACK
+```
+
+![image](support/gr1.png){width=70%}
+
+![image](support/gr2.png){width=70%}
+
+\newpage
+
+```c
+g = graph_load(argv[1]);
+printf("Initial vertex? ");
+scanf("%d", &i);
+src = graph_find(g, i);
+
+graph_attribute_init (g);
+graph_bfs (g, src);
+
+n = g->g;
+printf ("List of vertices:\n");
+while (n != NULL) {
+  if (n->color != WHITE) {
+    printf("%2d: %d (%d)\n",
+        n->id, n->dist, n->pred ? n->pred->id : -1);
+  }
+  n = n->next;
+}
+graph_dispose(g);
+
+void graph_bfs (graph_t *g, vertex_t *n) {
+  queue_t *qp;
+  vertex_t *d;
+  edge_t *e;
+  qp = queue_init (g->nv);
+  n->color = GREY;
+  n->dist = 0;
+  n->pred = NULL;
+  queue_put (qp, (void *)n);
+
+  while (!queue_empty_m(qp)) {
+    queue_get(qp, (void **)&n);
+    e = n->head;
+    while (e != NULL) {
+      d = e->dst;
+      if (d->color == WHITE) {
+        d->color = GREY;
+        d->dist = n->dist + 1;
+        d->pred = n;
+        queue_put (qp, (void *)d);
+      }
+      e = e->next;
+    }
+    n->color = BLACK;
+  }
+  queue_dispose (qp, NULL);
+}
+```
+\newpage
+
+## Depth-First Search (DFS)
+
+```c
+DFS (G)
+for each vertex v in V
+v.color = WHITE
+v.dtime = v.endtime = inf
+v.pred = NULL
+time = 0
+for each vertex v in V
+if (v.color = WHITE)
+DFS_r (G, v)
+DFS_r (G, u)
+time++
+u.dtime = time
+u.color = GRAY
+for each v in Adj(u)
+if (v.color == WHITE)
+v.pred = u
+DFS_r (G, v)
+u.color = BLACK
+time++
+u.endtime = time
+```
+
+![image](support/gr3.png){width=70%}  
+
+![image](support/gr4.png){width=70%}  
+
+\newpage
+
+```c
+g = graph_load (argv[1]);
+printf ("Initial vertex? ");
+scanf ("%d", &i);
+src = graph_find (g, i);
+graph_attribute_init (g);
+graph_dfs (g, src);
+graph_dispose (g);
+
+void graph_dfs (graph_t *g, vertex_t *n) {
+  int currTime=0;
+  vertex_t *tmp, *tmp2;
+  printf("List of edges:\n");
+  currTime = graph_dfs_r (g, n, currTime);
+  for (tmp=g->g; tmp!=NULL; tmp=tmp->next) {
+    if (tmp->color == WHITE) {
+      currTime = graph_dfs_r (g, tmp, currTime);
+    }
+  }
+  printf("List of vertices:\n");
+  for (tmp=g->g; tmp!=NULL; tmp=tmp->next) {
+    tmp2 = tmp->pred;
+    printf("%2d: %2d/%2d (%d)\n",
+        tmp->id, tmp->disc_time, tmp->endp_time,
+        (tmp2!=NULL) ? tmp->pred->id : -1);
+  }
+}
+
+int graph_dfs_r(graph_t *g, vertex_t *n, int currTime) {
+  edge_t *e;
+  vertex_t *t;
+  n->color = GREY;
+  n->disc_time = ++currTime;
+  e = n->head;
+  while (e != NULL) {
+    t = e->dst;
+    switch (tmp->color) {
+      case WHITE: printf("%d -> %d : T\n", n->id, t->id);
+                  break;
+      case GREY : printf("%d -> %d : B\n", n->id, t->id);
+                  break;
+      case BLACK:
+                  if (n->disc_time < t->disc_time) {
+                    printf("%d -> %d : F\n",n->disc_time,t->disc_time);
+                  } else {
+                    printf("%d -> %d : C\n", n->id, t->id);
+                  }
+    }
+    if (tmp->color == WHITE) {
+      tmp->pred = n;
+      currTime = graph_dfs_r (g, tmp, currTime);
+    }
+    e = e->next;
+  }
+  n->color = BLACK;
+  n->endp_time = ++currTime;
+  return currTime;
+}
+```
+
+\newpage
+
+# Libraries
+
+## List library 
+
+### Stack
+
 ```c
 #ifndef _STACK_PUBLIC
 #define _STACK_PUBLIC
@@ -2235,7 +2258,7 @@ void stack_dispose(stack_t *sp, void (*quit)(void *)) {
 
 \newpage
 
-## BST Library
+### BST Library
 
 ```c
 #ifndef _TREE_PUBLIC_INCLUDED
@@ -2540,9 +2563,9 @@ static node_t *findDeleteMax2(data_t *d, node_t *rp) {
 
 \newpage
 
-# Item library
+## Item library
 
-## Item with Stack
+### Item with Stack
 ```c
 #ifndef _ITEM
 #define _ITEM
@@ -2610,13 +2633,13 @@ void item_dispose (void *ptr) {
 }
 ```
 
-## Item with BST
+### Item with BST
 
 \newpage
 
-# Util library
+## Util library
 
-## Util with Stack
+### Util with Stack
 
 ```c
 #ifndef _UTIL
@@ -2731,13 +2754,13 @@ void util_matrix_dispose(void ***ptr, unsigned int n, unsigned int m,
 ```
 
 
-## Util with BST
+### Util with BST
 
 \newpage
 
-# Data Library
+## Data Library
 
-## Data with BST
+### Data with BST
 
 ```c
 #ifndef _DATA_INCLUDED
@@ -2791,7 +2814,7 @@ int compare(data_t d1, data_t d2) {
 
 \newpage
 
-# Symbol table
+## Symbol table
 
 ```c
 #ifndef ST_H_DEFINED
@@ -2944,7 +2967,7 @@ void STdisplay(ST st) {
 }
 ```
 
-## Item with Symbol tables
+### Item with Symbol tables
 
 ```c
 #ifndef _DATO_INCLUDED
@@ -2963,7 +2986,6 @@ Key KEYscan();
 int KEYcompare(Key k1, Key k2);
 Key KEYget(Item data);
 #endif
-
 ```
 
 ```c
@@ -3020,9 +3042,11 @@ Item ITEMsetvoid() {
   }
   return tmp;
 }
-
-
 ```
+
+
+## Graphs
+
 
 # Prototypes Library
 
