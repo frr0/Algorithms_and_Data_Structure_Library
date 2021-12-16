@@ -537,7 +537,7 @@ mat[i] = (int **) malloc (r * sizeof (int*));
   }
 ```
 
-![image](support/2.png){width=70%}  
+![image](support/2.png){width=50%}  
 
 - As for 1D arrays, also 2D arrays may be made
 visible outside the environment in which they
@@ -754,12 +754,12 @@ int read (void) {
 **Assigning a new value ```val``` to the ```p``` element in order to insert that element in the list**     
 **Malloc the struct**     
 
-![image](support/0.png){width=70%}  
+![image](support/0.png){width=50%}  
 
 
 ### List visit     
 
-![image](support/1.png){width=70%}  
+![image](support/1.png){width=50%}  
 
 ```c   
 /*   
@@ -778,7 +778,7 @@ node_t *insert (node_t *head, int val) {
 `p` insertion `ahead`     
 `O(n)` cost   
 
-![image](support/5.png) {width=70%}   
+![image](support/5.png){width=50%}   
 
 ```c   
    
@@ -791,7 +791,7 @@ node_t *insert (node_t *head, int val) {
 ```   
 ### In-order insertion   
 
-![image](support/6.png) {width=70%}    
+![image](support/6.png){width=50%}    
 
 `new->next = p->next`     
 `p->next = new`   
@@ -826,13 +826,13 @@ or
 `p->next = NULL`
 `val1->next = p`
 
-![image](support/7.png){width=70%}       
+![image](support/7.png){width=50%}       
 
 ## List searching     
 
 if `p->key == value` you exit and unless `p == NULL` you're good in your element of the list     
 
-![image](support/2.png) {width=70%}     
+![image](support/2.png){width=50%}     
 
 ```c   
 /*   
@@ -856,7 +856,7 @@ void search (node_t *head, int val) {
 
 than you free `p`   
 
-![image](support/3.png) {width=70%}    
+![image](support/3.png){width=50%}    
 
 `p = head`     
 `head = head->next`     
@@ -873,13 +873,13 @@ or
    
 `p` is only not to lose forever that element (red one), without step 1 I lose reference to elements and at the end ov the program I have many leaks. If I lose the reference I can not free it.   
 
-![image](support/4.png) {width=70%}    
+![image](support/4.png){width=50%}    
    
 ## List deletion (Free)   
 
 ### Free the entire list   
 
-![image](support/8.png){width=70%}     
+![image](support/8.png){width=50%}     
 
 ```c   
 while (head !=0){   
@@ -1007,9 +1007,9 @@ void display (node_t *head) {
 
 You don't check for `null`   
 
-![image](support/9.png) {width=70%}    
+![image](support/9.png){width=50%}    
 
-![image](support/10.png) {width=70%}    
+![image](support/10.png){width=50%}    
 
 ```c   
 sentinel->key = value;   
@@ -1035,13 +1035,13 @@ so you reuse the array instead of use a matrix
   
 ### Enqueue  
 
-![image](support/12.png){width=70%}  
+![image](support/12.png){width=50%}  
 
-![image](support/11.png){width=70%}  
+![image](support/11.png){width=50%}  
 
 ### Dequeue  
 
-![image](support/13.png){width=70%}  
+![image](support/13.png){width=50%}  
 
 ```c
 list_t *dequeue (list_t *tail, int *val, int *status) {
@@ -1112,7 +1112,7 @@ list_t *dequeue (list_t *tail, int *val, int *status) {
 
 #### search  
 
-![image](support/14.png){width=70%}  
+![image](support/14.png){width=50%}  
 
 **linear cosst, not logaritmic, so, don't use at the examination**  
 
@@ -1154,11 +1154,11 @@ the comparison
 #### insert
 
 
-![image](support/15.png){width=70%}  
+![image](support/15.png){width=50%}  
 
-![image](support/16.png){width=70%}  
+![image](support/16.png){width=50%}  
 
-![image](support/17.png){width=70%}  
+![image](support/17.png){width=50%}  
 
 ```c
 list_t *insert (list_t *head, int val) {
@@ -1202,27 +1202,27 @@ list_t *extract (list_t *head, int val) {
 }
 ```
 
-![image](support/18.png){width=70%}  
+![image](support/18.png){width=50%}  
   
 #### Double linked list  
 
 \newpage
 
-![image](support/19.png){width=70%}  
+![image](support/19.png){width=50%}  
 
 #### List of List  
 
-![image](support/20.png){width=70%}  
+![image](support/20.png){width=50%}  
 
 #### Example
 
-![image](support/21.png){width=70%}
+![image](support/21.png){width=50%}
 
 you can extract from head1 and you insert in head2 lifo? with a head insertion
 
 solution  
 
-![image](support/22.png){width=70%}
+![image](support/22.png){width=50%}
 
 ```c
 p = head1;
@@ -1233,7 +1233,7 @@ while (p != NULL){
 }
 ```
 
-![image](support/23.png){width=70%} 
+![image](support/23.png){width=50%} 
 
 Head extrction and in order insertion
 
@@ -1423,7 +1423,7 @@ void ShellSort (int A[], int n) {
 > O(n^2)  
 There are multiple arrays, the given one, another with every single value that is in the previous array with in each cell has the number of times that number exist in the previous array. A third array with the cumulative number of element at each index. Another array with the previous array numbers shifted by 1 index to the right. At this point number 0 at index 0 is between position 0 and 1, 1 occurrence, number 1 at index 1 is between position 1 and 4, 3 occurrences in the last vectors, number 2 at index 2 is between position 4 and 4, 0 occurrences in the last vectors, and last number, 3 at index 3 is between position 4 and 6, 2 occurrences in the last array.  
 
-![Counting sort](support/count.png){width=70%}
+![Counting sort](support/count.png){width=50%}
 
 ```c
 #define MAX 100
@@ -1588,6 +1588,42 @@ int main(){
   return 0;
 }
 ```
+
+### C func 
+
+```c
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int cmpfunc(const void *a, const void *b) { return (*(int *)a - *(int *)b); }
+
+static int cmpstringp(const void *p1, const void *p2) {
+  return strcmp(*(const char **)p1, *(const char **)p2);
+}
+
+int main(int argc, char *argv[]) {
+  assert(argc > 2);
+
+  int values[] = {88, 56, 100, 2, 25};
+  char *words[] = {"ciao", "dasih", "fklgj", "jfhsg", "qhfls"};
+
+  qsort(&argv[1], argc - 1, sizeof(char *), cmpstringp);
+  qsort(values, 5, sizeof(int), cmpfunc);
+  qsort(words, 5, sizeof(char *), cmpstringp);
+
+  for (int j = 0; j < argc; j++)
+    puts(argv[j]);
+
+  for (int n = 0; n < 5; n++) {
+    printf("%d ", values[n]);
+    puts(words[n]);
+  }
+}
+```
+
+
 \newpage
 
 # Complexity equation
@@ -1639,7 +1675,7 @@ heap->A[PARENT(i)]  //is its parentd
 heap->A[0]
 ```
 
-![image](support/heap0.png){width=70%}  
+![image](support/heap0.png){width=50%}  
 
 the tree is filled in the array order
 
@@ -1757,7 +1793,7 @@ void increase_key (PQ pq, int i) {
 
 # Binary Search Tree
 
-![image](support/Preorder-from-Inorder-and-Postorder-traversals.jpg){width=70%}
+![image](support/Preorder-from-Inorder-and-Postorder-traversals.jpg){width=50%}
 
 ## Implementation
 
@@ -1864,7 +1900,7 @@ It doesn't backtrack
 * modifyiable during the process
   - choice stored in priority queue
 
-![image](support/gr0.png){width=70%}
+![image](support/gr0.png){width=50%}
 
 ```c
 typedef struct activity {
@@ -1989,9 +2025,9 @@ BFS (G, s)
     u.color = BLACK
 ```
 
-![image](support/gr1.png){width=70%}
+![image](support/gr1.png){width=50%}
 
-![image](support/gr2.png){width=70%}
+![image](support/gr2.png){width=50%}
 
 \newpage
 
@@ -2070,9 +2106,9 @@ time++
 u.endtime = time
 ```
 
-![image](support/gr3.png){width=70%}  
+![image](support/gr3.png){width=50%}  
 
-![image](support/gr4.png){width=70%}  
+![image](support/gr4.png){width=50%}  
 
 \newpage
 
@@ -2137,6 +2173,172 @@ int graph_dfs_r(graph_t *g, vertex_t *n, int currTime) {
 ```
 
 \newpage
+
+# Graphs Applications
+
+![image](support/gapp.png){width=50%}
+
+```c
+graph_t *graph_transpose (graph_t *g) {
+  graph_t *h;
+  int i, j;
+  h = (graph_t *) util_calloc (1, sizeof (graph_t));
+  h->nv = g->nv;
+  h->g = (vertex_t *) util_calloc (g->nv, sizeof(vertex_t));
+  for (i=0; i<h->nv; i++) {
+    h->g[i] = g->g[i];
+    h->g[i].rowAdj = (int *) util_calloc (h->nv, sizeof(int));
+    for (j=0; j<h->nv; j++) {
+      h->g[i].rowAdj[j] = g->g[j].rowAdj[i];
+    }
+  }
+  return h;
+}
+graph_t *graph_transpose (graph_t *g) {
+  graph_t *h = NULL;
+  vertex_t *tmp;
+  edge_t *e;
+  int i;
+  h = (graph_t *) util_calloc (1, sizeof(graph_t));
+  h->nv = g->nv;
+  for (i=h->nv-1; i>=0; i--)
+    h->g = new_node (h->g, i);
+  tmp = g->g;
+  while (tmp != NULL) {
+    e = tmp->head;
+    while (e != NULL) {
+      new_edge (h, e->dst->id, tmp->id, e->weight);
+      e = e->next;
+    }
+    tmp = tmp->next;
+  }
+  return h;
+}
+```
+
+![image](support/gapp1.png){width=50%}
+
+![image](support/gapp2.png){width=50%}
+
+![image](support/gapp3.png){width=50%}
+
+```c
+void graph_dag (graph_t *g){
+  int i, *post, loop=0, timer=0;
+  post = (int *)util_malloc(g->nv*sizeof(int));
+  for (i=0; i<g->nv; i++) {
+    if (g->g[i].color == WHITE) {
+      timer = graph_dag_r (g, i, post, timer, &loop);
+    }
+  }
+  if (loop != 0) {
+    fprintf (stdout, "Loop detected!\n");
+  } else {
+    fprintf (stdout, "Topological sort (direct):");
+    for (i=g->nv-1; i>=0; i--) {
+      fprintf(stdout, " %d", post[i]);
+    }
+    fprintf (stdout, "\n");
+  }
+  free (post);
+}
+int graph_dag_r(graph_t *g, int i, int *post, int t,
+    int *loop) {
+  int j;
+  g->g[i].color = GREY;
+  for (j=0; j<g->nv; j++) {
+    if (g->g[i].rowAdj[j] != 0) {
+      if (g->g[j].color == GREY) {
+        *loop = 1;
+      }
+      if (g->g[j].color == WHITE) {
+        t = graph_dag_r(g, j, post, t, loop);
+      }
+    }
+  }
+  g->g[i].color = BLACK;
+  post[t++] = i;
+  return t;
+}
+```
+
+## Connectivity
+
+![image](support/conn0.png){width=50%}
+
+### Bridges
+
+![image](support/bridge.png){width=50%}
+
+### Connected components
+
+![image](support/conn1.png){width=50%}
+
+### Kosaraju
+
+> compute the reverse graph (Transpose graph)
+
+![image](support/kos0.png){width=50%}
+
+![image](support/kos1.png){width=50%}
+
+```c
+g = graph_load (argv[1]);
+sccs = graph_scc (g);
+fprintf (stdout, "Number of SCCs: %d\n", sccs);
+for (j=0; j<sccs; j++) {
+  fprintf (stdout, "SCC%d:", j);
+  for (i=0; i<g->nv; i++) {
+    if (g->g[i].scc == j) {
+      fprintf (stdout, " %d", i);
+    }
+  }
+  fprintf (stdout, "\n");
+}
+
+graph_dispose (g);
+int graph_scc (graph_t *g) {
+  graph_t *h;
+  int i, id=0, timer=0;
+  int *post, *tmp;
+  h = graph_transpose (g);
+  post = (int *) util_malloc (g->nv*sizeof(int));
+  for (i=0; i<g->nv; i++) {
+    if (h->g[i].color == WHITE) {
+      timer = graph_scc_r (h, i, post, id, timer);
+    }
+  }
+  graph_dispose (h);
+  id = timer = 0;
+  tmp = (int *) util_malloc (g->nv * sizeof(int));
+  for (i=g->nv-1; i>=0; i--) {
+    if (g->g[post[i]].color == WHITE) {
+      timer=graph_scc_r(g, post[i], tmp, id, timer);
+      id++;
+    }
+  }
+  free (post);
+  free (tmp);
+  return id;
+}
+
+int graph_scc_r(
+    graph_t *g, int i, int *post, int id, int t
+    ) {
+  int j;
+  g->g[i].color = GREY;
+  g->g[i].scc = id;
+  for (j=0; j<g->nv; j++) {
+    if (g->g[i].rowAdj[j]!=0 &&
+        g->g[j].color==WHITE) {
+      t = graph_scc_r (g, j, post, id, t);
+    }
+  }
+  g->g[i].color = BLACK;
+  post[t++] = i;
+  return t;
+}
+```
 
 # Libraries
 
