@@ -4,6 +4,32 @@ author: Francesco Ranellucci
 date: dicember 05, 2021
 ---
 \newpage
+LICENSE
+
+This document is just a collection of my personal notes taken while following the lectures of Algorithms and Data Structures at Polythecnic University of Turin, with the addition of some professor material
+
+Copyright © 2021 Francesco Ranellucci
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+\newpage
+
 
 # Pointers
 ```c
@@ -37,7 +63,8 @@ id2|x|x|x|x||
 b|x|||||
 precentage|x|x|x|x||
 
-## Pointers 
+## Pointers
+
 Pointers are varibles whose values are memory addresses 
 
 - The address operator, *
@@ -45,7 +72,7 @@ Pointers are varibles whose values are memory addresses
   - `*p = v = 5` because it's openrand `p` points to `v`
 - The indirection operator, &
   - Given a variable, it takes its address
-  - Given `*p = v = 5`  `&v` is the address of `v`
+  - Given `*p = v = 5` `&v` is the address of `v`
 
 ```c
 <type> *<pointer>;
@@ -162,6 +189,7 @@ p|It is the address of v that points to v|Address 140735223946540
 
 ---
 ### Example
+
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -1218,9 +1246,9 @@ list_t *extract (list_t *head, int val) {
 
 ![image](support/21.png){width=50%}
 
-you can extract from head1 and you insert in head2 lifo? with a head insertion
+You can extract from head1, and you insert in head2 lifo '?' with a head insertion.
 
-solution  
+Solution  
 
 ![image](support/22.png){width=50%}
 
@@ -1641,6 +1669,239 @@ int main(int argc, char *argv[]) {
 ![image](support/rec5.png){width=50%}
 ![image](support/rec6.png){width=50%}
 ![image](support/rec7.png){width=50%}
+
+\newpage
+
+## Combinatorics
+
+### Multiplication
+
+- In a restaurant a menu is served made of
+  - Appetizers, 2 overall
+  - First course, 3 overall
+  - Second course, 2 overall
+- Any customer can choose 1 appetizer, 1 first course, and 1 second course
+- Problem
+  - How many different menus can the restaurant offer?
+  - How are these menus composed?
+
+- As far as the recursive function is concerned
+  - At each step index pos indicates the size of the partial solution
+  - If pos>=n a solution has been found
+  - The recursive step iterates on possible choices for the current value of pos
+    - The contents of sol[pos] is taken from val[pos].choices[i] extending each time the solution’s size by 1 and recurs on the pos+1-th choice
+  - Variable count is the integer return value for the recursive function and counts the number of solutions
+ 
+```c
+typedef struct val_s {
+  int num_choice;
+  int *choices;
+} val_t;
+
+val = malloc(n*sizeof(val_t));
+for (i=0; i<n; i++)
+val[i].choices =
+malloc(val[i].n_choice*sizeof(int));
+sol = malloc(n*sizeof(int));
+
+int mult_princ (val_t *val, int *sol, int n, int count, int pos) {
+  int i;
+
+  if (pos >= n) {
+    for (i = 0; i < n; i++)
+      printf("%d ", sol[i]);
+    printf("\n");
+    return count+1;
+  }
+  for (i=0; i<val[pos].num_choice; i++) {
+    sol[pos] = val[pos].choices[i];
+    count = mult_princ (val,sol,n,count,pos+1);
+  }
+  return count;
+}
+```
+
+### Simple Arrangement
+
+![image](support/arr1.png){width=70%}
+
+```c 
+val = malloc (n * sizeof(int));
+mark = malloc (n * sizeof(int));
+sol = malloc (k * sizeof(int));
+
+int arr (int *val, int *sol, int *mark, int n, int k, int count, int pos){
+  int i;
+}
+if (pos >= k){
+  for (i=0; i<k; i++)
+    printf("%d ", sol[i]);
+  printf("\n");
+  return count+1;
+}
+for (i=0; i<n; i++){
+  if (mark[i] == 0) {
+    mark[i] = 1;
+    sol[pos] = val[i];
+    count = arr(val,sol,mark,n,k,count,pos+1);
+    mark[i] = 0;
+  }
+  return count;
+}
+```
+
+
+### Arrangement with repetition
+
+![image](support/arr2.png){width=70%}
+\newpage
+
+```c
+int arr_rep (int *val, int *sol, int n, int k, int count, int pos) {
+  int i;
+  if (pos >= k) {
+    for (i=0; i<k; i++)
+      printf("%d ", sol[i]);
+    printf("\n");
+    Iteration on n choices
+      return count+1;
+  }
+  for (i=0; i<n; i++) {
+    sol[pos] = val[i];
+    count = arr_rep(val,sol,n,k,count,pos+1);
+  }
+  return count;
+}
+```
+
+### Simple Permutation
+
+![image](support/per1.png){width=70%}
+
+\newpage
+
+- In order not to generate repeated elements
+  - An array mark records already taken elements
+    - mark[i]=0 implies that the i-th element not yet taken, else 1
+    - The cardinality of mark equals the number of elements in val (all distinct, being a set)
+  - While choosing
+    - The i-th element is taken only if mark[i]==0, mark[i] is assigned with 1
+  - During backtrack
+    - mark[i] is assigned with 0
+  - Count stores the number of solutions
+
+```c 
+val = malloc (n * sizeof(int));
+sol = malloc (n * sizeof(int));
+mark = malloc (n * sizeof(int));
+
+int perm (int *val, int *sol, int *mark, int n, int count, int pos){
+  int i;
+
+  if (pos >= n){
+    for (i=0; i<n; i++)
+      printf("%d ", sol[i]);
+    printf("\n");
+    return count+1;
+  }
+
+  for (i=0; i<n; i++)
+    if (mark[i] == 0) {
+      mark[i] = 1;
+      sol[pos] = val[i];
+      count = perm(val,sol,mark,n,count,pos+1);
+      mark[i] = 0;
+    }
+  return count;
+}
+```
+
+\newpage
+
+### Permutation with repetition
+
+![image](support/perm2.png){width=70%}
+
+```c 
+int perm_rep (int *val_dist, int *sol, int *mark, int n, int n_dist, int count, int pos) {
+  int i;
+  if (pos >= n) {
+    for (i=0; i<n; i++)
+      printf("%d ", sol[i]);
+    printf("\n");
+    return count+1;
+  }
+  for (i=0; i<n_dist; i++) {
+    if (mark[i] > 0) {
+      mark[i]--;
+      sol[pos] = val_dist[i];
+      count = perm_rep (
+          val_dist,sol,mark,n,n_dist,count,pos+1);
+      mark[i]++;
+    }
+  }
+  return count;
+}
+```
+
+### Simple Combination
+
+![image](support/comb1.png){width=70%}
+
+```c 
+val = malloc (n * sizeof(int));
+sol = malloc (k * sizeof(int));
+
+int comb (int *val, int *sol, int n, int k, int start, int count, int pos) {
+  int i, j;
+
+  if (pos >= k) {
+    for (i=0; i<k; i++)
+      printf("%d ", sol[i]);
+    printf("\n");
+    return count+1;
+  }
+
+  sol[pos] filled with possible
+    values of val from start onwards
+    for (i=start; i<n; i++) {
+      sol[pos] = val[i];
+      count = comb(val,sol,n,k,i+1,count,pos+1);
+    }
+  return count;
+}
+```
+
+### Combination with repetition
+
+```c 
+val = malloc(n * sizeof(int));
+sol = malloc(k * sizeof(int));
+
+int comb_rep (int *val, int *sol, int n, int k, int start, int count, int pos) {
+  int i, j;
+
+  if (pos >= k) {
+    for (i=0; i<k; i++)
+      printf("%d ", sol[i]);
+    printf("\n");
+    return count+1;
+  }
+  for (i=start; i<n; i++) {
+    sol[pos] = val[i];
+    count = comb_rep(val,sol,n,k,i,count,pos+1);
+  }
+  return count;
+}
+```
+
+\newpage
+
+![image](support/summcom1.png){width=70%}
+
+![image](support/summcomb2.png){width=70%}
+
+![image](support/summcomb3.png){width=70%}
 
 \newpage
 
@@ -2339,6 +2600,176 @@ int graph_scc_r(
   return t;
 }
 ```
+
+# Minimum Spanning Trees (MST)
+\newpage
+
+> Graphs have to be connected, undirected, weighted, it has to be acyclic
+
+![image](support/mst0.png){width=70%}
+
+Minimum number of edges to touch all vertices.
+
+Electronic circuits have pins that have to be connected
+
+## Properties
+
+![image](support/mst1.png){width=70%}
+
+![image](support/mst2.png){width=70%}
+
+![image](support/mst3.png){width=70%}
+
+\newpage
+
+## Prim 
+Also known as Prim-Dijkstra
+
+![image](support/prim0.png){width=70%}
+
+```c
+typedef struct graph_s graph_t;
+typedef struct vertex_s vertex_t;
+typedef struct edge_s edge_t;
+struct graph_s {
+  vertex_t *g;
+  int nv;
+};
+struct edge_s {
+  int weight;
+  int dst;
+  edge_t *next;
+};
+struct vertex_s {
+  int id;
+  int color;
+  int dist;
+  int disc_time;
+  int endp_time;
+  int pred;
+  int scc;
+  edge_t *head;
+};
+g = graph_load (argv[1]);
+21
+Implementation
+weight = mst_prim (g);
+fprintf (stdout, "Total tree weight: %d\n", weight);
+graph_dispose(g);
+int mst_prim (graph_t *g) {
+  int i, j, min, weight=0;
+  int *fringe;
+  edge_t *e;
+  fringe = (int *) util_malloc (g->nv * sizeof(int));
+  for (i=0; i<g->nv; i++) {
+    fringe[i] = i;
+  }
+  fprintf (stdout, "List of edges making an MST:\n");
+  min = 0;
+  g->g[min].dist = 0;
+  while (min != -1) {
+    i = min;
+    g->g[i].pred = fringe[i];
+    weight += g->g[i].dist;
+    if (g->g[i].dist != 0) {
+      printf("Edge %d-%d (w=%d)\n",
+          fringe[i], i, g->g[i].dist);
+    }
+    min = -1;
+    e = g->g[i].head;
+    while (e != NULL) {
+      j = e->dst;
+      if (g->g[j].pred == -1) {
+        if (e->weight < g->g[j].dist) {
+          g->g[j].dist = e->weight;
+          fringe[j] = i;
+        }
+      }
+      e = e->next;
+    }
+    for (j=0; j<g->nv; j++) {
+      if (g->g[j].pred == -1) {
+        if (min==-1 || g->g[j].dist<g->g[min].dist) {
+          min = j;
+        }
+      }
+    }
+  }
+  free(fringe);
+  return weight;
+}
+```
+
+### Complexity
+
+![image](support/primcomp.png){width=70%}
+
+![image](support/primcomp1.png){width=70%}
+
+\newpage
+
+## Kruskal
+
+![image](support/krusk.png){width=70%}
+
+![image](support/krusk1.png){width=70%}
+
+\newpage
+
+# Single Source Shortest Paths (SSSP)
+
+> minimum path that can be found
+
+![image](support/sss.png){width=70%}
+
+For Unweighted graphs a simple BFS solves the problem
+
+![image](support/sss1.png){width=70%}
+
+![image](support/sss2.png){width=70%}
+
+![image](support/sss3.png){width=70%}
+
+![image](support/sss4.png){width=70%}
+
+![image](support/sss5.png){width=70%}
+
+![image](support/sss6.png){width=70%}
+
+## Bellman-Ford
+
+> working for non-negative weight edges
+
+## Dijkstra
+
+> not working for non-negative weight edges
+
+![image](support/dik.png){width=70%}
+
+### non-negative
+
+![image](support/dik1.png){width=70%}
+
+![image](support/dik2.png){width=70%}
+
+### negative
+
+![image](support/dik5.png){width=70%}
+
+![image](support/dik6.png){width=70%}
+
+### Complexity
+
+![image](support/dik7.png){width=70%}
+
+![image](support/dik8.png){width=70%}
+
+## A*
+
+> Dijkstra extension
+
+\newpage
+
 
 # Libraries
 
