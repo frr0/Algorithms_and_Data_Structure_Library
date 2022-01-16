@@ -6,7 +6,7 @@ date: dicember 05, 2021
 \newpage
 LICENSE
 
-This document is just a collection of my personal notes taken while following the lectures of Algorithms and Data Structures at Polythecnic University of Turin, with the addition of some professor material
+This document is just a collection of my personal notes taken while following the lectures of Algorithms and Data Structures at Polytechnic University of Turin, with the addition of some professor material
 
 Copyright © 2021 Francesco Ranellucci
 
@@ -30,6 +30,7 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 \newpage
 
+I ate a cake
 
 # Pointers
 ```c
